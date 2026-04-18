@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DalisApp - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            daliPink: "#ec4899",
+            daliPinkDark: "#be185d",
+            daliPinkSoft: "#fbcfe8",
+            daliPinkLight: "#fce7f3",
+            daliRose: "#db2777"
+          },
+          boxShadow: {
+            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-daliPinkSoft text-slate-900">
+
+  <div class="mx-auto flex min-h-screen max-w-md flex-col bg-daliPinkLight shadow-dali md:my-6 md:min-h-[90vh] md:rounded-[2rem] md:border-4 md:border-daliPinkDark">
+    
+    <header class="border-b-4 border-daliPinkDark bg-daliPink px-5 py-4 text-white">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <h1 class="text-3xl font-extrabold">DalisApp</h1>
+          <p class="text-sm text-pink-100">Bienvenida, Dalia 💖</p>
+        </div>
+        <a
+          href="login.html"
+          class="rounded-2xl border-2 border-white/70 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
+        >
+          Salir
+        </a>
+      </div>
+    </header>
+
+    <main class="flex-1 space-y-6 px-4 py-5">
+      
+      <section class="grid grid-cols-2 gap-4">
+        <article class="rounded-3xl border-2 border-daliPinkDark bg-daliPink p-4 text-white shadow-md">
+          <p class="text-sm font-semibold text-pink-100">Horas acumuladas</p>
+          <h2 class="mt-2 text-3xl font-extrabold">42:00</h2>
+          <p class="text-sm text-pink-100">hrs</p>
+        </article>
+
+        <article class="rounded-3xl border-2 border-daliPinkDark bg-daliRose p-4 text-white shadow-md">
+          <p class="text-sm font-semibold text-pink-100">Horas usadas</p>
+          <h2 class="mt-2 text-3xl font-extrabold">10:00</h2>
+          <p class="text-sm text-pink-100">hrs</p>
+        </article>
+      </section>
+
+      <section>
+        <article class="rounded-3xl border-2 border-daliPinkDark bg-white p-5 shadow-sm">
+          <p class="text-sm font-semibold uppercase tracking-wide text-daliPinkDark">
+            Saldo disponible
+          </p>
+          <h2 class="mt-2 text-4xl font-extrabold text-slate-900">32:00 hrs</h2>
+          <p class="mt-1 text-sm text-slate-500">
+            Horas extras generadas menos horas ya utilizadas.
+          </p>
+        </article>
+      </section>
+
+      <section class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <a
+          href="registro.html"
+          class="rounded-2xl border-2 border-daliPinkDark bg-daliPink px-4 py-4 text-center text-base font-bold text-white shadow-sm transition hover:bg-daliRose"
+        >
+          + Agregar horas
+        </a>
+
+        <a
+          href="registro.html"
+          class="rounded-2xl border-2 border-daliPinkDark bg-white px-4 py-4 text-center text-base font-bold text-daliPinkDark shadow-sm transition hover:bg-pink-50"
+        >
+          + Agregar usadas
+        </a>
+      </section>
+
+      <section class="rounded-3xl border-2 border-daliPinkDark bg-white p-5 shadow-sm">
+        <div class="mb-4 flex items-center justify-between">
+          <h3 class="text-lg font-extrabold text-daliPinkDark">Resumen mensual</h3>
+          <a href="resumen.html" class="text-sm font-bold text-daliPinkDark underline underline-offset-4">
+            Ver detalle
+          </a>
+        </div>
+
+        <div class="space-y-3 text-sm">
+          <div class="flex items-center justify-between rounded-2xl bg-daliPinkLight px-4 py-3">
+            <span class="font-semibold">Horas trabajadas</span>
+            <span class="font-extrabold">42:00 hrs</span>
+          </div>
+
+          <div class="flex items-center justify-between rounded-2xl bg-daliPinkLight px-4 py-3">
+            <span class="font-semibold">Horas usadas</span>
+            <span class="font-extrabold">10:00 hrs</span>
+          </div>
+
+          <div class="flex items-center justify-between rounded-2xl bg-daliPinkLight px-4 py-3">
+            <span class="font-semibold">Horas restantes</span>
+            <span class="font-extrabold">32:00 hrs</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="sticky bottom-0 grid grid-cols-3 border-t-4 border-daliPinkDark bg-white">
+      <a href="dashboard.html" class="px-3 py-4 text-center text-sm font-extrabold text-daliPinkDark">
+        Inicio
+      </a>
+      <a href="registro.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
+        Registro
+      </a>
+      <a href="resumen.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
+        Resumen
+      </a>
+    </nav>
+  </div>
+
+</body>
+</html>

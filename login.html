@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DalisApp - Iniciar sesión</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            daliPink: "#ec4899",
+            daliPinkDark: "#be185d",
+            daliPinkSoft: "#fbcfe8",
+            daliPinkLight: "#fce7f3",
+            daliRose: "#db2777"
+          },
+          boxShadow: {
+            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-daliPinkSoft flex items-center justify-center px-4">
+
+  <main class="w-full max-w-sm">
+    <section class="overflow-hidden rounded-[2rem] border-4 border-daliPinkDark bg-daliPinkLight shadow-dali">
+      
+      <div class="bg-daliPink px-8 py-14 text-center">
+        <h1 class="text-5xl font-extrabold tracking-tight text-white drop-shadow-sm">
+          DalisApp
+        </h1>
+        <p class="mt-3 text-sm font-medium text-pink-100">
+          Control de horas extras
+        </p>
+      </div>
+
+      <div class="px-6 py-8">
+        <form class="space-y-4" action="dashboard.html">
+          <div>
+            <label for="email" class="mb-2 block text-sm font-semibold text-slate-800">
+              Correo electrónico
+            </label>
+            <input
+              id="email"
+              type="email"
+              placeholder="dalia@correo.cl"
+              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+            />
+          </div>
+
+          <div>
+            <label for="password" class="mb-2 block text-sm font-semibold text-slate-800">
+              Contraseña
+            </label>
+            <input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="mt-2 w-full rounded-2xl border-2 border-daliPinkDark bg-daliPink px-4 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.01] hover:bg-daliRose active:scale-[0.99]"
+          >
+            Iniciar sesión
+          </button>
+        </form>
+
+        <div class="mt-5 text-center">
+          <a href="#" class="text-sm font-semibold text-daliPinkDark underline underline-offset-4">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

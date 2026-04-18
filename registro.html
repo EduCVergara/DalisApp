@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DalisApp - Agregar horas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            daliPink: "#ec4899",
+            daliPinkDark: "#be185d",
+            daliPinkSoft: "#fbcfe8",
+            daliPinkLight: "#fce7f3",
+            daliRose: "#db2777"
+          },
+          boxShadow: {
+            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-daliPinkSoft text-slate-900">
+
+  <div class="mx-auto flex min-h-screen max-w-md flex-col bg-daliPinkLight shadow-dali md:my-6 md:min-h-[90vh] md:rounded-[2rem] md:border-4 md:border-daliPinkDark">
+    
+    <header class="border-b-4 border-daliPinkDark bg-daliPink px-5 py-4 text-white">
+      <div class="flex items-center gap-3">
+        <a href="dashboard.html" class="text-2xl font-bold leading-none">←</a>
+        <div>
+          <h1 class="text-2xl font-extrabold">Agregar horas extras</h1>
+          <p class="text-sm text-pink-100">Registra horas ganadas o usadas</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 px-4 py-5">
+      <form class="space-y-4">
+        
+        <div>
+          <label for="tipo" class="mb-2 block text-sm font-semibold text-slate-800">
+            Tipo de registro
+          </label>
+          <select
+            id="tipo"
+            class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+          >
+            <option>Horas trabajadas</option>
+            <option>Horas usadas</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="fecha" class="mb-2 block text-sm font-semibold text-slate-800">
+            Fecha
+          </label>
+          <input
+            id="fecha"
+            type="date"
+            class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="inicio" class="mb-2 block text-sm font-semibold text-slate-800">
+              Hora inicio
+            </label>
+            <input
+              id="inicio"
+              type="time"
+              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+            />
+          </div>
+
+          <div>
+            <label for="termino" class="mb-2 block text-sm font-semibold text-slate-800">
+              Hora término
+            </label>
+            <input
+              id="termino"
+              type="time"
+              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="total" class="mb-2 block text-sm font-semibold text-slate-800">
+            Total de horas
+          </label>
+          <input
+            id="total"
+            type="text"
+            value="04:30"
+            readonly
+            class="w-full rounded-2xl border-2 border-daliPinkDark bg-pink-50 px-4 py-3 font-bold text-slate-900 outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="observacion" class="mb-2 block text-sm font-semibold text-slate-800">
+            Observación
+          </label>
+          <textarea
+            id="observacion"
+            rows="4"
+            placeholder="Ej: apoyo en cierre mensual, trabajo fuera de horario, uso de compensación..."
+            class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
+          ></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3 pt-2">
+          <button
+            type="submit"
+            class="w-full rounded-2xl border-2 border-daliPinkDark bg-daliPink px-4 py-3 text-base font-extrabold text-white shadow-sm transition hover:bg-daliRose"
+          >
+            Registrar
+          </button>
+
+          <a
+            href="dashboard.html"
+            class="w-full rounded-2xl border-2 border-daliPinkDark bg-white px-4 py-3 text-center text-base font-bold text-daliPinkDark shadow-sm transition hover:bg-pink-50"
+          >
+            Cancelar
+          </a>
+        </div>
+      </form>
+    </main>
+
+    <nav class="sticky bottom-0 grid grid-cols-3 border-t-4 border-daliPinkDark bg-white">
+      <a href="dashboard.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
+        Inicio
+      </a>
+      <a href="registro.html" class="px-3 py-4 text-center text-sm font-extrabold text-daliPinkDark">
+        Registro
+      </a>
+      <a href="resumen.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
+        Resumen
+      </a>
+    </nav>
+  </div>
+
+</body>
+</html>

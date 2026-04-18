@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DalisApp - Resumen mensual</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            daliPink: "#ec4899",
+            daliPinkDark: "#be185d",
+            daliPinkSoft: "#fbcfe8",
+            daliPinkLight: "#fce7f3",
+            daliRose: "#db2777"
+          },
+          boxShadow: {
+            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-daliPinkSoft text-slate-900">
+
+  <div class="mx-auto flex min-h-screen max-w-md flex-col bg-daliPinkLight shadow-dali md:my-6 md:min-h-[90vh] md:rounded-[2rem] md:border-4 md:border-daliPinkDark">
+    
+    <header class="border-b-4 border-daliPinkDark bg-daliPink px-5 py-4 text-white">
+      <div class="flex items-center gap-3">
+        <a href="dashboard.html" class="text-2xl font-bold leading-none">←</a>
+        <div>
+          <h1 class="text-2xl font-extrabold">Resumen mensual</h1>
+          <p class="text-sm text-pink-100">Acumulado y detalle de registros</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 space-y-5 px-4 py-5">
+
+      <section class="grid grid-cols-1 gap-3">
+        <article class="rounded-3xl border-2 border-daliPinkDark bg-white p-4 shadow-sm">
+          <p class="text-sm font-semibold text-daliPinkDark">Horas trabajadas</p>
+          <h2 class="mt-1 text-3xl font-extrabold">42:00 hrs</h2>
+        </article>
+
+        <article class="rounded-3xl border-2 border-daliPinkDark bg-white p-4 shadow-sm">
+          <p class="text-sm font-semibold text-daliPinkDark">Horas usadas</p>
+          <h2 class="mt-1 text-3xl font-extrabold">10:00 hrs</h2>
+        </article>
+
+        <article class="rounded-3xl border-2 border-daliPinkDark bg-daliPink p-4 text-white shadow-sm">
+          <p class="text-sm font-semibold text-pink-100">Horas restantes</p>
+          <h2 class="mt-1 text-3xl font-extrabold">32:00 hrs</h2>
+        </article>
+      </section>
+
+      <section class="rounded-3xl border-2 border-daliPinkDark bg-white p-4 shadow-sm">
+        <div class="mb-4 flex items-center justify-between">
+          <h3 class="text-lg font-extrabold text-daliPinkDark">Abril 2026</h3>
+          <button class="rounded-xl border-2 border-daliPinkDark px-3 py-2 text-sm font-bold text-daliPinkDark">
+            Filtrar
+          </button>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border-2 border-pink-200">
+          <table class="min-w-full text-sm">
+            <thead class="bg-daliPink text-white">
+              <tr>
+                <th class="px-3 py-3 text-left font-bold">Fecha</th>
+                <th class="px-3 py-3 text-left font-bold">Inicio</th>
+                <th class="px-3 py-3 text-left font-bold">Término</th>
+                <th class="px-3 py-3 text-left font-bold">Total</th>
+                <th class="px-3 py-3 text-left font-bold">Tipo</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white text-slate-800">
+              <tr class="border-t border-pink-100">
+                <td class="px-3 py-3">05/04/2026</td>
+                <td class="px-3 py-3">18:00</td>
+                <td class="px-3 py-3">22:30</td>
+                <td class="px-3 py-3 font-bold">04:30</td>
+                <td class="px-3 py-3">
+                  <span class="rounded-full bg-pink-100 px-3 py-1 text-xs font-bold text-daliPinkDark">
+                    Trabajadas
+                  </span>
+                </td>
+              </tr>
+
+              <tr class="border-t border-pink-100">
+                <td class="px-3 py-3">10/04/2026</td>
+                <td class="px-3 py-3">09:00</td>
+                <td class="px-3 py-3">11:00</td>
+                <td class="px-3 py-3 font-bold">02:00</td>
+                <td class="px-3 py-3">
+                  <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">
+                    Usadas
+                  </span>
+                </td>
+              </tr>
+
+              <tr class="border-t border-pink-100">
+                <td class="px-3 py-3">12/04/2026</td>
+                <td class="px-3 py-3">17:30</td>
+                <td class="px-3 py-3">20:00</td>
+                <td class="px-3 py-3 font-bold">02:30</td>
+                <td class="px-3 py-3">
+                  <span class="rounded-full bg-pink-100 px-3 py-1 text-xs font-bold text-daliPinkDark">
+                    Trabajadas
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="sticky bottom-0 grid grid-cols-3 border-t-4 border-daliPinkDark bg-white">
+      <a href="dashboard.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
+        Inicio
+      </a>
+      <a href="registro.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
+        Registro
+      </a>
+      <a href="resumen.html" class="px-3 py-4 text-center text-sm font-extrabold text-daliPinkDark">
+        Resumen
+      </a>
+    </nav>
+  </div>
+
+</body>
+</html>
