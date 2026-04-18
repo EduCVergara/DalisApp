@@ -73,10 +73,14 @@ function normalizePocketBaseError(error, fallbackMessage) {
   return fallbackMessage;
 }
 
+function withEndpointHint(message) {
+  return `${message} Endpoint: ${DEFAULT_PB_URL}`;
+}
+
 function requirePbClient() {
   const pb = getPbClient();
   if (!pb) {
-    throw new Error("PocketBase no esta disponible en este navegador.");
+    throw new Error(withEndpointHint("PocketBase no esta disponible en este navegador."));
   }
   return pb;
 }
@@ -141,9 +145,11 @@ export async function signIn(email, password) {
     return { user, mode: "pocketbase" };
   } catch (error) {
     throw new Error(
-      normalizePocketBaseError(
-        error,
-        "No fue posible iniciar sesion. Verifica tu correo, contrasena o el estado de PocketBase.",
+      withEndpointHint(
+        normalizePocketBaseError(
+          error,
+          "No fue posible iniciar sesion. Verifica tu correo, contrasena o el estado de PocketBase.",
+        ),
       ),
     );
   }
@@ -180,7 +186,9 @@ export async function listExtraHours(monthKey = "") {
     }));
   } catch (error) {
     throw new Error(
-      normalizePocketBaseError(error, "No fue posible cargar los registros de horas extra."),
+      withEndpointHint(
+        normalizePocketBaseError(error, "No fue posible cargar los registros de horas extra."),
+      ),
     );
   }
 }
@@ -218,6 +226,8 @@ export async function createExtraHour(payload) {
 
     return { ...normalizedRecord, id: saved.id, user: authUserId };
   } catch (error) {
-    throw new Error(normalizePocketBaseError(error, "No fue posible guardar el registro."));
+    throw new Error(
+      withEndpointHint(normalizePocketBaseError(error, "No fue posible guardar el registro.")),
+    );
   }
 }
