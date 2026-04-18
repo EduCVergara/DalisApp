@@ -19,4 +19,4 @@ COPY serve.json ./serve.json
 
 ENV PORT=3000
 
-CMD ["sh", "-c", "serve -c /app/serve.json dist -l ${PORT}"]
+CMD ["sh", "-c", "serve -c /app/serve.json -l ${PORT} dist"]
