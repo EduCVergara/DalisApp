@@ -45,6 +45,38 @@ function writeJson(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+function normalizePocketBaseError(error, fallbackMessage) {
+  const status = Number(error?.status || error?.response?.status || 0);
+  const rawMessage = String(
+    error?.response?.message ||
+      error?.data?.message ||
+      error?.message ||
+      "",
+  ).toLowerCase();
+
+  if (status === 0 || rawMessage.includes("failed to fetch") || rawMessage.includes("networkerror")) {
+    return "No fue posible conectar con el servidor. Revisa tu conexion o intenta nuevamente.";
+  }
+
+  if (status === 400 || status === 401 || rawMessage.includes("invalid") || rawMessage.includes("auth")) {
+    return "Correo o contrasena incorrectos.";
+  }
+
+  if (rawMessage.includes("something went wrong while processing your request")) {
+    return "No fue posible procesar tu solicitud. Intenta nuevamente en unos segundos.";
+  }
+
+  if (rawMessage.includes("not found")) {
+    return "No se encontro la cuenta solicitada.";
+  }
+
+  if (rawMessage.includes("too many requests")) {
+    return "Se alcanzó el limite de intentos. Espera un momento antes de volver a intentar.";
+  }
+
+  return fallbackMessage;
+}
+
 function requirePbClient() {
   const pb = getPbClient();
   if (!pb) {
@@ -113,8 +145,10 @@ export async function signIn(email, password) {
     return { user, mode: "pocketbase" };
   } catch (error) {
     throw new Error(
-      error?.message ||
+      normalizePocketBaseError(
+        error,
         "No fue posible iniciar sesion. Verifica tu correo, contrasena o el estado de PocketBase.",
+      ),
     );
   }
 }
@@ -149,7 +183,9 @@ export async function listExtraHours(monthKey = "") {
       month_key: record.month_key || getMonthKey(record.date),
     }));
   } catch (error) {
-    throw new Error(error?.message || "No fue posible cargar los registros de horas extra.");
+    throw new Error(
+      normalizePocketBaseError(error, "No fue posible cargar los registros de horas extra."),
+    );
   }
 }
 
@@ -186,6 +222,6 @@ export async function createExtraHour(payload) {
 
     return { ...normalizedRecord, id: saved.id, user: authUserId };
   } catch (error) {
-    throw new Error(error?.message || "No fue posible guardar el registro.");
+    throw new Error(normalizePocketBaseError(error, "No fue posible guardar el registro."));
   }
 }
