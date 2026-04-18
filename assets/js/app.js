@@ -8,6 +8,8 @@ import {
   getCurrentMonthKey,
   getMonthLabel,
   getYearKey,
+  isValidMonthKey,
+  normalizeMonthKey,
   summarizeRecords,
 } from "/assets/js/utils.js";
 
@@ -58,6 +60,8 @@ async function renderSummaryPage() {
   const availableYears = getAvailableYears(allRecords);
 
   monthInput.value = currentMonthKey;
+  monthInput.setAttribute("inputmode", "numeric");
+  monthInput.setAttribute("pattern", "\\d{4}-\\d{2}");
 
   if (yearInput) {
     yearInput.innerHTML = availableYears
@@ -66,15 +70,27 @@ async function renderSummaryPage() {
     yearInput.value = availableYears.includes(currentYear) ? currentYear : availableYears[0];
   }
 
+  const syncMonthInput = () => {
+    const normalizedMonth = normalizeMonthKey(monthInput.value, currentMonthKey);
+    const isValidMonth = isValidMonthKey(monthInput.value);
+
+    monthInput.value = normalizedMonth;
+    monthInput.setCustomValidity(isValidMonth ? "" : "Ingresa un mes valido en formato año-mes.");
+    monthInput.reportValidity();
+
+    return normalizedMonth;
+  };
+
   const paintMonth = async () => {
-    const records = await listExtraHours(monthInput.value);
+    const selectedMonth = syncMonthInput();
+    const records = await listExtraHours(selectedMonth);
     const summary = summarizeRecords(records);
     const title = document.querySelector("[data-table-title]");
 
     document.querySelector("[data-summary-earned]").textContent = formatMinutesLabel(summary.earned);
     document.querySelector("[data-summary-used]").textContent = formatMinutesLabel(summary.used);
     document.querySelector("[data-summary-balance]").textContent = formatMinutesLabel(summary.balance);
-    title.textContent = getMonthLabel(monthInput.value);
+    title.textContent = getMonthLabel(selectedMonth);
 
     if (records.length === 0) {
       tableBody.innerHTML = `<tr><td colspan="6" class="px-6 py-6 text-center font-bold text-slate-500">Todavia no hay registros para este mes.</td></tr>`;
@@ -169,6 +185,17 @@ async function renderSummaryPage() {
       .join("");
   };
 
+  monthInput.addEventListener("input", () => {
+    const rawValue = monthInput.value.trim();
+
+    if (!rawValue) {
+      monthInput.setCustomValidity("Ingresa un mes valido en formato año-mes.");
+      return;
+    }
+
+    monthInput.setCustomValidity(isValidMonthKey(rawValue) ? "" : "Ingresa un mes valido en formato año-mes.");
+  });
+  monthInput.addEventListener("blur", syncMonthInput);
   monthInput.addEventListener("change", paintMonth);
   yearInput?.addEventListener("change", paintYear);
   await paintMonth();

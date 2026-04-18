@@ -86,7 +86,7 @@ function paintAnnualHistory(history) {
   if (history.length === 0) {
     container.innerHTML = `
       <div class="rounded-[1.2rem] border border-rose-100 bg-white/80 px-4 py-4 text-sm font-bold text-slate-500">
-        Aun no hay acumulado anual para mostrar.
+        Aún no hay acumulado anual para mostrar.
       </div>
     `;
     return;

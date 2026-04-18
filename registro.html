@@ -8,25 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="/tailwind.config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            dali: { 50: "#fff4fa", 100: "#fce7f3", 200: "#fbcfe8", 500: "#ec4899", 600: "#db2777", 700: "#be185d" },
-          },
-          fontFamily: {
-            body: ["Nunito", "sans-serif"],
-            title: ["Baloo 2", "cursive"],
-          },
-          boxShadow: {
-            shell: "0 18px 40px rgba(190, 24, 93, 0.22)",
-          },
-        },
-      },
-    };
-  </script>
+  <script src="/tailwind.setup.js"></script>
 </head>
 <body data-page="registro" class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] p-2 font-body text-slate-900 sm:p-5">
   <main class="mx-auto grid min-h-[calc(100vh-16px)] w-full max-w-[470px] grid-rows-[auto_1fr_auto] overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur">

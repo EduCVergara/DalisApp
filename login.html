@@ -8,33 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <script src="/tailwind.config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            dali: {
-              50: "#fff4fa",
-              100: "#fce7f3",
-              200: "#fbcfe8",
-              500: "#ec4899",
-              600: "#db2777",
-              700: "#be185d",
-            },
-          },
-          fontFamily: {
-            body: ["Nunito", "sans-serif"],
-            brand: ["Pacifico", "cursive"],
-          },
-          boxShadow: {
-            shell: "0 18px 40px rgba(190, 24, 93, 0.22)",
-            soft: "0 20px 30px rgba(123, 17, 63, 0.18)",
-          },
-        },
-      },
-    };
-  </script>
+  <script src="/tailwind.setup.js"></script>
   <style>
     .image-badge.is-anim-pop .app-image img {
       animation: panda-pop 420ms ease-out;
@@ -178,7 +154,7 @@
 </head>
 <body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] px-2 py-3 font-body text-slate-900 sm:grid sm:place-items-center sm:p-5">
   <main class="min-h-[calc(100vh-24px)] w-full overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur md:min-h-[930px] md:max-w-[470px]">
-    <section class="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_40%),linear-gradient(135deg,#f067af_0%,#ec4899_72%)] px-6 pb-8 pt-7 text-center text-white">
+    <section class="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_40%),linear-gradient(135deg,#f067af_0%,#ec4899_72%)] px-6 pb-4 pt-7 text-center text-white">
       <div class="mx-auto flex max-w-sm flex-col items-center">
         <h1 class="font-brand text-[4.35rem] leading-[0.95] tracking-[0.01em] text-white drop-shadow-[0_8px_18px_rgba(123,17,63,0.2)] sm:text-[5.2rem]">DalisApp</h1>
         <div
@@ -194,7 +170,7 @@
       </div>
     </section>
 
-    <section class="px-7 pb-7 pt-8">
+    <section class="px-6 pb-4 pt-4">
       <div class="space-y-1">
         <p class="text-sm font-extrabold uppercase tracking-[0.16em] text-dali-700">Bienvenida <span class="welcome-heart inline-block text-xl">🩷</span></p>
         <h2 class="text-4xl font-extrabold leading-none text-slate-900">Iniciar sesión</h2>

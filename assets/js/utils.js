@@ -87,6 +87,23 @@ export function getMonthKey(dateValue) {
   return String(dateValue).slice(0, 7);
 }
 
+export function isValidMonthKey(value) {
+  if (typeof value !== "string") return false;
+
+  const normalizedValue = value.trim();
+  if (!/^\d{4}-\d{2}$/.test(normalizedValue)) return false;
+
+  const [yearText, monthText] = normalizedValue.split("-");
+  const year = Number(yearText);
+  const month = Number(monthText);
+
+  return Number.isInteger(year) && Number.isInteger(month) && month >= 1 && month <= 12;
+}
+
+export function normalizeMonthKey(value, fallback = DEFAULT_MONTH) {
+  return isValidMonthKey(value) ? value.trim() : fallback;
+}
+
 export function getYearKey(value) {
   if (!value) return String(new Date().getFullYear());
   return String(value).slice(0, 4);
@@ -105,7 +122,7 @@ export function formatDate(dateValue) {
 }
 
 export function getMonthLabel(monthKey) {
-  if (!monthKey) return "Sin mes";
+  if (!isValidMonthKey(monthKey)) return "Sin mes";
   const [year, month] = monthKey.split("-");
   const monthName = new Date(Number(year), Number(month) - 1, 1).toLocaleDateString("es-CL", {
     month: "long",

@@ -8,26 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <script src="/tailwind.config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            dali: { 50: "#fff4fa", 100: "#fce7f3", 200: "#fbcfe8", 500: "#ec4899", 600: "#db2777", 700: "#be185d" },
-          },
-          fontFamily: {
-            body: ["Nunito", "sans-serif"],
-            title: ["Baloo 2", "cursive"],
-            brand: ["Pacifico", "cursive"],
-          },
-          boxShadow: {
-            shell: "0 18px 40px rgba(190, 24, 93, 0.22)",
-          },
-        },
-      },
-    };
-  </script>
+  <script src="/tailwind.setup.js"></script>
 </head>
 <body data-page="dashboard" class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] p-2 font-body text-slate-900 sm:p-5">
   <main class="mx-auto grid min-h-[calc(100vh-16px)] w-full max-w-[470px] grid-rows-[auto_1fr_auto] overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur">
@@ -38,7 +21,7 @@
           <p class="mt-1 text-sm font-bold text-pink-100">Hola, <span data-user-name>Dalia</span></p>
         </div>
         <div class="flex gap-2">
-          <a class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px]" href="/registro.html">Agregar horas</a>
+          <a class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px] text-center" href="/registro.html">Agregar horas</a>
           <button class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px]" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
         </div>
       </div>
@@ -74,7 +57,7 @@
             <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Resumen mensual</p>
             <h2 data-current-month-label class="font-title text-3xl leading-none text-slate-900">Mes actual</h2>
           </div>
-          <a href="/resumen.html" class="text-sm font-extrabold text-dali-700">Ver detalle</a>
+          <a href="/resumen.html" class="text-sm font-extrabold text-dali-700 bg-dali-100 px-3 py-2 rounded-full hover:translate-y-[-1px] border border-dali-500 hover:bg-dali-400 text-center hover:text-dali-50 hover:border-dali-700">Ver detalle</a>
         </div>
         <div class="mt-4 grid gap-3">
           <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
@@ -99,8 +82,8 @@
             <h2 class="font-title text-3xl leading-none text-slate-900">Historial <span data-year-label>2026</span></h2>
           </div>
           <div class="rounded-[1.2rem] bg-[linear-gradient(180deg,#f675b5_0%,#ec4899_100%)] px-4 py-3 text-right text-white shadow-sm">
-            <span class="block text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-pink-100">Saldo del año</span>
-            <strong data-year-balance class="mt-1 block font-title text-[2rem] leading-none">00:00 hrs</strong>
+            <span class="block text-[0.72rem] text-center font-extrabold uppercase tracking-[0.14em] text-pink-100">Saldo del año</span>
+            <strong data-year-balance class="mt-1 block text-center font-title text-[2rem] leading-none">00:00 hrs</strong>
           </div>
         </div>
         <div class="mt-4 grid gap-3" data-annual-history></div>
@@ -110,7 +93,7 @@
         <div class="flex items-start justify-between gap-3">
           <div>
             <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Visual rápido</p>
-            <h2 class="font-title text-3xl leading-none text-slate-900">Comparacion mensual</h2>
+            <h2 class="font-title text-3xl leading-none text-slate-900">Comparación mensual</h2>
           </div>
           <span class="text-center rounded-full bg-dali-100 px-3 py-2 text-xs font-extrabold text-dali-700">Versión inicial</span>
         </div>
@@ -135,10 +118,10 @@
       <section class="rounded-[1.75rem] border border-rose-100 bg-white/75 p-5 shadow-sm">
         <div class="flex items-start justify-between gap-3">
           <div>
-            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Ultimos movimientos</p>
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Últimos movimientos</p>
             <h2 class="font-title text-3xl leading-none text-slate-900">Actividad reciente</h2>
           </div>
-          <a href="/registro.html" class="text-sm font-extrabold text-dali-700">Nuevo registro</a>
+          <a href="/registro.html" class="text-sm font-extrabold text-dali-700 bg-dali-100 px-3 py-2 rounded-full hover:translate-y-[-1px] border border-dali-500 hover:bg-dali-400 text-center hover:text-dali-50 hover:border-dali-700">Nuevo registro</a>
         </div>
         <div class="mt-4 grid gap-3" data-recent-records></div>
       </section>
