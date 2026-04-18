@@ -3,7 +3,16 @@ import { DEFAULT_MONTH, DEMO_RECORDS, getMonthKey, sortByNewest, uid } from "/as
 const AUTH_KEY = "dalisapp.auth";
 const RECORDS_KEY = "dalisapp.records";
 const PB_URL_KEY = "dalisapp.pb.url";
-const DEFAULT_PB_URL = "http://127.0.0.1:8090";
+const ENV_PB_URL = String(import.meta.env.VITE_POCKETBASE_URL || "").trim();
+const ENV_APP_URL = String(import.meta.env.VITE_APP_URL || window.location.origin || "").trim();
+const DEFAULT_PB_URL = ENV_PB_URL || "http://127.0.0.1:8090";
+const DEFAULT_APP_URL = ENV_APP_URL || window.location.origin;
+
+export const APP_CONFIG = {
+  appUrl: DEFAULT_APP_URL,
+  pocketbaseUrl: DEFAULT_PB_URL,
+  mode: import.meta.env.MODE,
+};
 
 function getPbUrl() {
   return localStorage.getItem(PB_URL_KEY) || DEFAULT_PB_URL;

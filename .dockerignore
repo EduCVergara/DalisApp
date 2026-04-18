@@ -1,0 +1,10 @@
+.git
+.gitignore
+node_modules
+dist
+.vite
+pb_data
+.env
+.env.*
+!.env.example
+pocketbase/pocketbase.exe
