@@ -1,7 +1,6 @@
 import { DEFAULT_MONTH, getMonthKey } from "/assets/js/utils.js";
 
 const AUTH_KEY = "dalisapp.auth";
-const PB_URL_KEY = "dalisapp.pb.url";
 const ENV_PB_URL = String(import.meta.env.VITE_POCKETBASE_URL || "").trim();
 const ENV_APP_URL = String(import.meta.env.VITE_APP_URL || window.location.origin || "").trim();
 const DEFAULT_PB_URL = ENV_PB_URL || "http://127.0.0.1:8090";
@@ -13,15 +12,11 @@ export const APP_CONFIG = {
   mode: import.meta.env.MODE,
 };
 
-function getPbUrl() {
-  return localStorage.getItem(PB_URL_KEY) || DEFAULT_PB_URL;
-}
-
 function getPbClient() {
   if (!window.PocketBase) return null;
 
   try {
-    return new window.PocketBase(getPbUrl());
+    return new window.PocketBase(DEFAULT_PB_URL);
   } catch {
     return null;
   }
