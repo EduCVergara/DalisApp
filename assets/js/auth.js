@@ -19,14 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = form.password.value;
 
     try {
-      const result = await signIn(email, password);
+      await signIn(email, password);
       status.hidden = false;
       status.className =
         "mt-4 rounded-[1.4rem] border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700";
-      status.textContent =
-        result.mode === "pocketbase"
-          ? "Sesion iniciada con PocketBase."
-          : "PocketBase no respondio o aun no tiene usuarios creados. Entraste en modo demo.";
+      status.textContent = "Sesion iniciada con PocketBase.";
 
       window.setTimeout(() => {
         window.location.replace("/dashboard.html");

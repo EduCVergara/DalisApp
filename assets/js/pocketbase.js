@@ -1,7 +1,6 @@
-import { DEFAULT_MONTH, DEMO_RECORDS, getMonthKey, sortByNewest, uid } from "/assets/js/utils.js";
+import { DEFAULT_MONTH, getMonthKey } from "/assets/js/utils.js";
 
 const AUTH_KEY = "dalisapp.auth";
-const RECORDS_KEY = "dalisapp.records";
 const PB_URL_KEY = "dalisapp.pb.url";
 const ENV_PB_URL = String(import.meta.env.VITE_POCKETBASE_URL || "").trim();
 const ENV_APP_URL = String(import.meta.env.VITE_APP_URL || window.location.origin || "").trim();
@@ -28,6 +27,11 @@ function getPbClient() {
   }
 }
 
+function getPbAuthRecord() {
+  const pb = getPbClient();
+  return pb?.authStore?.model || null;
+}
+
 function readJson(key, fallback) {
   try {
     const rawValue = localStorage.getItem(key);
@@ -41,18 +45,49 @@ function writeJson(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-function ensureSeedRecords() {
-  const existing = readJson(RECORDS_KEY, null);
-  if (!existing || !Array.isArray(existing) || existing.length === 0) {
-    writeJson(RECORDS_KEY, DEMO_RECORDS);
+function requirePbClient() {
+  const pb = getPbClient();
+  if (!pb) {
+    throw new Error("PocketBase no esta disponible en este navegador.");
   }
+  return pb;
+}
+
+function requireAuthenticatedUser() {
+  const user = getCurrentUser();
+  if (!user) {
+    throw new Error("Tu sesion expiró. Vuelve a iniciar sesion.");
+  }
+  return user;
 }
 
 export function getCurrentUser() {
-  return readJson(AUTH_KEY, null);
+  const storedUser = readJson(AUTH_KEY, null);
+  const authRecord = getPbAuthRecord();
+
+  if (!authRecord && !storedUser) {
+    return null;
+  }
+
+  const resolvedUser = {
+    id: authRecord?.id || storedUser?.id || null,
+    name:
+      authRecord?.name ||
+      storedUser?.name ||
+      authRecord?.email?.split("@")?.[0] ||
+      storedUser?.email?.split("@")?.[0] ||
+      "Dalia",
+    email: authRecord?.email || storedUser?.email || null,
+    mode: "pocketbase",
+  };
+
+  writeJson(AUTH_KEY, resolvedUser);
+  return resolvedUser;
 }
 
 export function signOut() {
+  const pb = getPbClient();
+  pb?.authStore?.clear();
   localStorage.removeItem(AUTH_KEY);
 }
 
@@ -64,76 +99,70 @@ export async function signIn(email, password) {
     throw new Error("Ingresa un correo valido y una contrasena de al menos 4 caracteres.");
   }
 
-  const pb = getPbClient();
-  if (pb) {
-    try {
-      const authData = await pb.collection("users").authWithPassword(cleanEmail, cleanPassword);
-      const user = {
-        id: authData.record?.id || "pb-user",
-        name: authData.record?.name || cleanEmail.split("@")[0],
-        email: cleanEmail,
-        mode: "pocketbase",
-      };
-      writeJson(AUTH_KEY, user);
-      return { user, mode: "pocketbase" };
-    } catch {
-      // Falls through to demo mode so the MVP remains testable visually.
-    }
-  }
+  const pb = requirePbClient();
 
-  ensureSeedRecords();
-  const user = {
-    id: "demo-user",
-    name: cleanEmail.split("@")[0] || "Dalia",
-    email: cleanEmail,
-    mode: "demo",
-  };
-  writeJson(AUTH_KEY, user);
-  return { user, mode: "demo" };
+  try {
+    const authData = await pb.collection("users").authWithPassword(cleanEmail, cleanPassword);
+    const user = {
+      id: authData.record?.id || pb.authStore.model?.id || "pb-user",
+      name: authData.record?.name || pb.authStore.model?.name || cleanEmail.split("@")[0],
+      email: cleanEmail,
+      mode: "pocketbase",
+    };
+    writeJson(AUTH_KEY, user);
+    return { user, mode: "pocketbase" };
+  } catch (error) {
+    throw new Error(
+      error?.message ||
+        "No fue posible iniciar sesion. Verifica tu correo, contrasena o el estado de PocketBase.",
+    );
+  }
 }
 
 export async function listExtraHours(monthKey = "") {
-  ensureSeedRecords();
-  const user = getCurrentUser();
+  requireAuthenticatedUser();
+  const pb = requirePbClient();
   const selectedMonth = monthKey || DEFAULT_MONTH;
-  const pb = getPbClient();
+  const authUserId = pb.authStore.model?.id;
 
-  if (pb && user?.mode === "pocketbase") {
-    try {
-      const records = await pb.collection("extra_hours").getFullList({
-        sort: "-date,-start_time",
-        filter: monthKey
-          ? `user="${pb.authStore.model?.id}" && month_key="${selectedMonth}"`
-          : `user="${pb.authStore.model?.id}"`,
-      });
-
-      return records.map((record) => ({
-        id: record.id,
-        user: record.user,
-        date: record.date?.slice(0, 10),
-        start_time: record.start_time,
-        end_time: record.end_time,
-        total_minutes: Number(record.total_minutes || 0),
-        type: record.type,
-        notes: record.notes || "",
-        month_key: record.month_key || getMonthKey(record.date),
-      }));
-    } catch {
-      // Fall back to local demo store if PocketBase is unavailable or collections are not ready.
-    }
+  if (!authUserId) {
+    throw new Error("No hay una sesion valida en PocketBase.");
   }
 
-  const allRecords = readJson(RECORDS_KEY, DEMO_RECORDS);
-  const filtered = monthKey ? allRecords.filter((record) => record.month_key === selectedMonth) : allRecords;
-  return sortByNewest(filtered);
+  try {
+    const records = await pb.collection("extra_hours").getFullList({
+      sort: "-date,-start_time",
+      filter: monthKey
+        ? `user="${authUserId}" && month_key="${selectedMonth}"`
+        : `user="${authUserId}"`,
+    });
+
+    return records.map((record) => ({
+      id: record.id,
+      user: record.user,
+      date: record.date?.slice(0, 10),
+      start_time: record.start_time,
+      end_time: record.end_time,
+      total_minutes: Number(record.total_minutes || 0),
+      type: record.type,
+      notes: record.notes || "",
+      month_key: record.month_key || getMonthKey(record.date),
+    }));
+  } catch (error) {
+    throw new Error(error?.message || "No fue posible cargar los registros de horas extra.");
+  }
 }
 
 export async function createExtraHour(payload) {
-  ensureSeedRecords();
-  const user = getCurrentUser();
+  requireAuthenticatedUser();
+  const pb = requirePbClient();
+  const authUserId = pb.authStore.model?.id;
+
+  if (!authUserId) {
+    throw new Error("No hay una sesion valida en PocketBase.");
+  }
+
   const normalizedRecord = {
-    id: uid("record"),
-    user: user?.id || "demo-user",
     date: payload.date,
     start_time: payload.start_time,
     end_time: payload.end_time,
@@ -143,28 +172,20 @@ export async function createExtraHour(payload) {
     month_key: payload.month_key || getMonthKey(payload.date),
   };
 
-  const pb = getPbClient();
-  if (pb && user?.mode === "pocketbase") {
-    try {
-      const saved = await pb.collection("extra_hours").create({
-        user: pb.authStore.model?.id,
-        date: normalizedRecord.date,
-        start_time: normalizedRecord.start_time,
-        end_time: normalizedRecord.end_time,
-        total_minutes: normalizedRecord.total_minutes,
-        type: normalizedRecord.type,
-        notes: normalizedRecord.notes,
-        month_key: normalizedRecord.month_key,
-      });
+  try {
+    const saved = await pb.collection("extra_hours").create({
+      user: authUserId,
+      date: normalizedRecord.date,
+      start_time: normalizedRecord.start_time,
+      end_time: normalizedRecord.end_time,
+      total_minutes: normalizedRecord.total_minutes,
+      type: normalizedRecord.type,
+      notes: normalizedRecord.notes,
+      month_key: normalizedRecord.month_key,
+    });
 
-      return { ...normalizedRecord, id: saved.id };
-    } catch {
-      // Continue with local persistence.
-    }
+    return { ...normalizedRecord, id: saved.id, user: authUserId };
+  } catch (error) {
+    throw new Error(error?.message || "No fue posible guardar el registro.");
   }
-
-  const records = readJson(RECORDS_KEY, DEMO_RECORDS);
-  records.push(normalizedRecord);
-  writeJson(RECORDS_KEY, records);
-  return normalizedRecord;
 }
