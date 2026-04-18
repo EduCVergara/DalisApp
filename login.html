@@ -3,83 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DalisApp - Iniciar sesión</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            daliPink: "#ec4899",
-            daliPinkDark: "#be185d",
-            daliPinkSoft: "#fbcfe8",
-            daliPinkLight: "#fce7f3",
-            daliRose: "#db2777"
-          },
-          boxShadow: {
-            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
-          }
-        }
-      }
-    }
-  </script>
+  <title>DalisApp | Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/app.css" />
 </head>
-<body class="min-h-screen bg-daliPinkSoft flex items-center justify-center px-4">
+<body class="auth-page">
+  <main class="phone-shell auth-shell">
+    <section class="auth-hero">
+      <div class="brand-mark brand-mark--large">DalisApp</div>
+      <p class="auth-subtitle">Control simple y amable de tus horas extras</p>
+    </section>
 
-  <main class="w-full max-w-sm">
-    <section class="overflow-hidden rounded-[2rem] border-4 border-daliPinkDark bg-daliPinkLight shadow-dali">
-      
-      <div class="bg-daliPink px-8 py-14 text-center">
-        <h1 class="text-5xl font-extrabold tracking-tight text-white drop-shadow-sm">
-          DalisApp
-        </h1>
-        <p class="mt-3 text-sm font-medium text-pink-100">
-          Control de horas extras
-        </p>
+    <section class="auth-panel">
+      <div class="section-heading">
+        <p class="eyebrow">Bienvenida</p>
+        <h1>Iniciar sesion</h1>
+        <p class="muted">Usa PocketBase si ya lo tienes levantado. Si no, puedes entrar en modo demo.</p>
       </div>
 
-      <div class="px-6 py-8">
-        <form class="space-y-4" action="dashboard.html">
-          <div>
-            <label for="email" class="mb-2 block text-sm font-semibold text-slate-800">
-              Correo electrónico
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="dalia@correo.cl"
-              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-            />
-          </div>
+      <form id="login-form" class="stack-md">
+        <label class="field">
+          <span>Correo electronico</span>
+          <input id="email" name="email" type="email" placeholder="dalia@empresa.cl" autocomplete="email" required />
+        </label>
 
-          <div>
-            <label for="password" class="mb-2 block text-sm font-semibold text-slate-800">
-              Contraseña
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-            />
-          </div>
+        <label class="field">
+          <span>Contrasena</span>
+          <input id="password" name="password" type="password" placeholder="Ingresa tu clave" autocomplete="current-password" required />
+        </label>
 
-          <button
-            type="submit"
-            class="mt-2 w-full rounded-2xl border-2 border-daliPinkDark bg-daliPink px-4 py-3 text-lg font-bold text-white shadow-md transition hover:scale-[1.01] hover:bg-daliRose active:scale-[0.99]"
-          >
-            Iniciar sesión
-          </button>
-        </form>
+        <button type="submit" class="btn btn-primary btn-block">Iniciar sesion</button>
+      </form>
 
-        <div class="mt-5 text-center">
-          <a href="#" class="text-sm font-semibold text-daliPinkDark underline underline-offset-4">
-            ¿Olvidaste tu contraseña?
-          </a>
-        </div>
+      <div id="login-status" class="status-card" hidden></div>
+
+      <div class="auth-hint">
+        <p>Demo rapido</p>
+        <p class="muted">Prueba con cualquier correo y una contrasena de 4 caracteres o mas si PocketBase aun no esta activo.</p>
       </div>
     </section>
   </main>
 
+  <script src="https://unpkg.com/pocketbase@0.21.5/dist/pocketbase.umd.js"></script>
+  <script type="module" src="/assets/js/auth.js"></script>
 </body>
 </html>

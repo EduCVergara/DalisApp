@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.vite/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# PocketBase runtime data
+pb_data/
+pb_migrations/
+
+# Local binaries and archives
+*.zip
+*.tar
+*.gz
+
+# Temporary files
+*.tmp
+*.temp
+*.bak

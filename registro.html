@@ -3,147 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DalisApp - Agregar horas</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            daliPink: "#ec4899",
-            daliPinkDark: "#be185d",
-            daliPinkSoft: "#fbcfe8",
-            daliPinkLight: "#fce7f3",
-            daliRose: "#db2777"
-          },
-          boxShadow: {
-            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
-          }
-        }
-      }
-    }
-  </script>
+  <title>DalisApp | Registrar horas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/app.css" />
 </head>
-<body class="min-h-screen bg-daliPinkSoft text-slate-900">
-
-  <div class="mx-auto flex min-h-screen max-w-md flex-col bg-daliPinkLight shadow-dali md:my-6 md:min-h-[90vh] md:rounded-[2rem] md:border-4 md:border-daliPinkDark">
-    
-    <header class="border-b-4 border-daliPinkDark bg-daliPink px-5 py-4 text-white">
-      <div class="flex items-center gap-3">
-        <a href="dashboard.html" class="text-2xl font-bold leading-none">←</a>
+<body data-page="registro">
+  <main class="phone-shell app-shell">
+    <header class="topbar topbar--compact">
+      <div class="row align-center gap-sm">
+        <a href="/dashboard.html" class="back-link" aria-label="Volver al dashboard">Volver</a>
         <div>
-          <h1 class="text-2xl font-extrabold">Agregar horas extras</h1>
-          <p class="text-sm text-pink-100">Registra horas ganadas o usadas</p>
+          <p class="eyebrow on-dark">Formulario</p>
+          <h1>Agregar horas extras</h1>
         </div>
       </div>
+      <button class="icon-button" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
     </header>
 
-    <main class="flex-1 px-4 py-5">
-      <form class="space-y-4">
-        
-        <div>
-          <label for="tipo" class="mb-2 block text-sm font-semibold text-slate-800">
-            Tipo de registro
-          </label>
-          <select
-            id="tipo"
-            class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-          >
-            <option>Horas trabajadas</option>
-            <option>Horas usadas</option>
-          </select>
+    <section class="content stack-lg">
+      <section class="card">
+        <div class="section-heading">
+          <p class="eyebrow">Nuevo registro</p>
+          <h2>Completa los datos</h2>
         </div>
 
-        <div>
-          <label for="fecha" class="mb-2 block text-sm font-semibold text-slate-800">
-            Fecha
-          </label>
-          <input
-            id="fecha"
-            type="date"
-            class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-          />
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label for="inicio" class="mb-2 block text-sm font-semibold text-slate-800">
-              Hora inicio
+        <form id="record-form" class="stack-md">
+          <div class="two-col">
+            <label class="field">
+              <span>Tipo</span>
+              <select id="type" name="type">
+                <option value="earned">Horas ganadas</option>
+                <option value="used">Horas usadas</option>
+              </select>
             </label>
-            <input
-              id="inicio"
-              type="time"
-              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-            />
+
+            <label class="field">
+              <span>Fecha</span>
+              <input id="date" name="date" type="date" required />
+            </label>
           </div>
 
-          <div>
-            <label for="termino" class="mb-2 block text-sm font-semibold text-slate-800">
-              Hora término
+          <div class="two-col">
+            <label class="field">
+              <span>Hora inicio</span>
+              <input id="start_time" name="start_time" type="time" required />
             </label>
-            <input
-              id="termino"
-              type="time"
-              class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-            />
+
+            <label class="field">
+              <span>Hora termino</span>
+              <input id="end_time" name="end_time" type="time" required />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Total calculado</span>
+            <input id="total_display" name="total_display" type="text" value="00:00 hrs" readonly />
+          </label>
+
+          <label class="field">
+            <span>Observacion</span>
+            <textarea id="notes" name="notes" rows="4" placeholder="Ej: soporte de cierre mensual o medio dia administrativo"></textarea>
+          </label>
+
+          <div class="button-row">
+            <button type="submit" class="btn btn-primary">Guardar registro</button>
+            <a href="/resumen.html" class="btn btn-secondary">Ver resumen</a>
+          </div>
+        </form>
+
+        <div id="record-status" class="status-card" hidden></div>
+      </section>
+
+      <section class="card card--soft">
+        <div class="row between align-start">
+          <div>
+            <p class="eyebrow">Ayuda visual</p>
+            <h2>Como se interpreta</h2>
+          </div>
+          <span class="tag">MVP</span>
+        </div>
+        <div class="summary-list">
+          <div>
+            <span>Horas ganadas</span>
+            <strong>Suman al disponible</strong>
+          </div>
+          <div>
+            <span>Horas usadas</span>
+            <strong>Descuentan del saldo</strong>
+          </div>
+          <div>
+            <span>Total</span>
+            <strong>Se calcula automaticamente</strong>
           </div>
         </div>
+      </section>
+    </section>
 
-        <div>
-          <label for="total" class="mb-2 block text-sm font-semibold text-slate-800">
-            Total de horas
-          </label>
-          <input
-            id="total"
-            type="text"
-            value="04:30"
-            readonly
-            class="w-full rounded-2xl border-2 border-daliPinkDark bg-pink-50 px-4 py-3 font-bold text-slate-900 outline-none"
-          />
-        </div>
-
-        <div>
-          <label for="observacion" class="mb-2 block text-sm font-semibold text-slate-800">
-            Observación
-          </label>
-          <textarea
-            id="observacion"
-            rows="4"
-            placeholder="Ej: apoyo en cierre mensual, trabajo fuera de horario, uso de compensación..."
-            class="w-full rounded-2xl border-2 border-daliPink bg-white px-4 py-3 text-slate-900 outline-none focus:border-daliPinkDark focus:ring-4 focus:ring-pink-200"
-          ></textarea>
-        </div>
-
-        <div class="grid grid-cols-1 gap-3 pt-2">
-          <button
-            type="submit"
-            class="w-full rounded-2xl border-2 border-daliPinkDark bg-daliPink px-4 py-3 text-base font-extrabold text-white shadow-sm transition hover:bg-daliRose"
-          >
-            Registrar
-          </button>
-
-          <a
-            href="dashboard.html"
-            class="w-full rounded-2xl border-2 border-daliPinkDark bg-white px-4 py-3 text-center text-base font-bold text-daliPinkDark shadow-sm transition hover:bg-pink-50"
-          >
-            Cancelar
-          </a>
-        </div>
-      </form>
-    </main>
-
-    <nav class="sticky bottom-0 grid grid-cols-3 border-t-4 border-daliPinkDark bg-white">
-      <a href="dashboard.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
-        Inicio
-      </a>
-      <a href="registro.html" class="px-3 py-4 text-center text-sm font-extrabold text-daliPinkDark">
-        Registro
-      </a>
-      <a href="resumen.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
-        Resumen
-      </a>
+    <nav class="bottom-nav">
+      <a href="/dashboard.html" data-nav="dashboard">Inicio</a>
+      <a href="/registro.html" data-nav="registro">Registro</a>
+      <a href="/resumen.html" data-nav="resumen">Resumen</a>
     </nav>
-  </div>
+  </main>
 
+  <script src="https://unpkg.com/pocketbase@0.21.5/dist/pocketbase.umd.js"></script>
+  <script type="module" src="/assets/js/registros.js"></script>
 </body>
 </html>

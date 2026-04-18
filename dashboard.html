@@ -3,129 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DalisApp - Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            daliPink: "#ec4899",
-            daliPinkDark: "#be185d",
-            daliPinkSoft: "#fbcfe8",
-            daliPinkLight: "#fce7f3",
-            daliRose: "#db2777"
-          },
-          boxShadow: {
-            dali: "0 10px 25px rgba(190, 24, 93, 0.18)"
-          }
-        }
-      }
-    }
-  </script>
+  <title>DalisApp | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/app.css" />
 </head>
-<body class="min-h-screen bg-daliPinkSoft text-slate-900">
-
-  <div class="mx-auto flex min-h-screen max-w-md flex-col bg-daliPinkLight shadow-dali md:my-6 md:min-h-[90vh] md:rounded-[2rem] md:border-4 md:border-daliPinkDark">
-    
-    <header class="border-b-4 border-daliPinkDark bg-daliPink px-5 py-4 text-white">
-      <div class="flex items-center justify-between gap-3">
-        <div>
-          <h1 class="text-3xl font-extrabold">DalisApp</h1>
-          <p class="text-sm text-pink-100">Bienvenida, Dalia 💖</p>
-        </div>
-        <a
-          href="login.html"
-          class="rounded-2xl border-2 border-white/70 px-4 py-2 text-sm font-bold text-white transition hover:bg-white/10"
-        >
-          Salir
-        </a>
+<body data-page="dashboard">
+  <main class="phone-shell app-shell">
+    <header class="topbar">
+      <div>
+        <p class="brand-mark">DalisApp</p>
+        <p class="muted on-dark">Hola, <span data-user-name>Dalia</span></p>
+      </div>
+      <div class="topbar-actions">
+        <a class="btn btn-ghost" href="/registro.html">Agregar horas</a>
+        <button class="icon-button" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
       </div>
     </header>
 
-    <main class="flex-1 space-y-6 px-4 py-5">
-      
-      <section class="grid grid-cols-2 gap-4">
-        <article class="rounded-3xl border-2 border-daliPinkDark bg-daliPink p-4 text-white shadow-md">
-          <p class="text-sm font-semibold text-pink-100">Horas acumuladas</p>
-          <h2 class="mt-2 text-3xl font-extrabold">42:00</h2>
-          <p class="text-sm text-pink-100">hrs</p>
-        </article>
+    <section class="content stack-lg">
+      <div class="section-heading centered">
+        <p class="eyebrow">Dashboard</p>
+        <h1>Resumen de horas extras</h1>
+      </div>
 
-        <article class="rounded-3xl border-2 border-daliPinkDark bg-daliRose p-4 text-white shadow-md">
-          <p class="text-sm font-semibold text-pink-100">Horas usadas</p>
-          <h2 class="mt-2 text-3xl font-extrabold">10:00</h2>
-          <p class="text-sm text-pink-100">hrs</p>
+      <section class="card-grid card-grid--stats">
+        <article class="metric-card metric-card--primary">
+          <p>Horas acumuladas</p>
+          <strong data-earned-total>00:00</strong>
+          <span>hrs ganadas</span>
         </article>
-      </section>
-
-      <section>
-        <article class="rounded-3xl border-2 border-daliPinkDark bg-white p-5 shadow-sm">
-          <p class="text-sm font-semibold uppercase tracking-wide text-daliPinkDark">
-            Saldo disponible
-          </p>
-          <h2 class="mt-2 text-4xl font-extrabold text-slate-900">32:00 hrs</h2>
-          <p class="mt-1 text-sm text-slate-500">
-            Horas extras generadas menos horas ya utilizadas.
-          </p>
+        <article class="metric-card metric-card--secondary">
+          <p>Horas usadas</p>
+          <strong data-used-total>00:00</strong>
+          <span>hrs utilizadas</span>
+        </article>
+        <article class="metric-card metric-card--light">
+          <p>Saldo disponible</p>
+          <strong data-balance-total>00:00</strong>
+          <span>hrs restantes</span>
         </article>
       </section>
 
-      <section class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        <a
-          href="registro.html"
-          class="rounded-2xl border-2 border-daliPinkDark bg-daliPink px-4 py-4 text-center text-base font-bold text-white shadow-sm transition hover:bg-daliRose"
-        >
-          + Agregar horas
-        </a>
-
-        <a
-          href="registro.html"
-          class="rounded-2xl border-2 border-daliPinkDark bg-white px-4 py-4 text-center text-base font-bold text-daliPinkDark shadow-sm transition hover:bg-pink-50"
-        >
-          + Agregar usadas
-        </a>
-      </section>
-
-      <section class="rounded-3xl border-2 border-daliPinkDark bg-white p-5 shadow-sm">
-        <div class="mb-4 flex items-center justify-between">
-          <h3 class="text-lg font-extrabold text-daliPinkDark">Resumen mensual</h3>
-          <a href="resumen.html" class="text-sm font-bold text-daliPinkDark underline underline-offset-4">
-            Ver detalle
-          </a>
+      <section class="card card--soft">
+        <div class="row between align-start">
+          <div>
+            <p class="eyebrow">Resumen mensual</p>
+            <h2 data-current-month-label>Abril 2026</h2>
+          </div>
+          <a href="/resumen.html" class="link-strong">Ver detalle</a>
         </div>
 
-        <div class="space-y-3 text-sm">
-          <div class="flex items-center justify-between rounded-2xl bg-daliPinkLight px-4 py-3">
-            <span class="font-semibold">Horas trabajadas</span>
-            <span class="font-extrabold">42:00 hrs</span>
+        <div class="summary-list">
+          <div>
+            <span>Trabajadas este mes</span>
+            <strong data-summary-earned>00:00 hrs</strong>
           </div>
-
-          <div class="flex items-center justify-between rounded-2xl bg-daliPinkLight px-4 py-3">
-            <span class="font-semibold">Horas usadas</span>
-            <span class="font-extrabold">10:00 hrs</span>
+          <div>
+            <span>Usadas este mes</span>
+            <strong data-summary-used>00:00 hrs</strong>
           </div>
-
-          <div class="flex items-center justify-between rounded-2xl bg-daliPinkLight px-4 py-3">
-            <span class="font-semibold">Horas restantes</span>
-            <span class="font-extrabold">32:00 hrs</span>
+          <div>
+            <span>Saldo del mes</span>
+            <strong data-summary-balance>00:00 hrs</strong>
           </div>
         </div>
       </section>
-    </main>
 
-    <nav class="sticky bottom-0 grid grid-cols-3 border-t-4 border-daliPinkDark bg-white">
-      <a href="dashboard.html" class="px-3 py-4 text-center text-sm font-extrabold text-daliPinkDark">
-        Inicio
-      </a>
-      <a href="registro.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
-        Registro
-      </a>
-      <a href="resumen.html" class="px-3 py-4 text-center text-sm font-bold text-slate-600">
-        Resumen
-      </a>
+      <section class="card">
+        <div class="row between align-start">
+          <div>
+            <p class="eyebrow">Visual rapido</p>
+            <h2>Comparacion mensual</h2>
+          </div>
+          <span class="tag">Primera version</span>
+        </div>
+        <div class="chart-row">
+          <div class="chart-bars" aria-hidden="true">
+            <div class="chart-col">
+              <span class="chart-value" data-chart-earned>0h</span>
+              <div class="chart-track"><i data-chart-earned-bar></i></div>
+              <small>Ganadas</small>
+            </div>
+            <div class="chart-col">
+              <span class="chart-value" data-chart-used>0h</span>
+              <div class="chart-track chart-track--pale"><i data-chart-used-bar></i></div>
+              <small>Usadas</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="row between align-start">
+          <div>
+            <p class="eyebrow">Ultimos movimientos</p>
+            <h2>Actividad reciente</h2>
+          </div>
+          <a href="/registro.html" class="link-strong">Nuevo registro</a>
+        </div>
+        <div class="timeline" data-recent-records></div>
+      </section>
+    </section>
+
+    <nav class="bottom-nav">
+      <a href="/dashboard.html" data-nav="dashboard">Inicio</a>
+      <a href="/registro.html" data-nav="registro">Registro</a>
+      <a href="/resumen.html" data-nav="resumen">Resumen</a>
     </nav>
-  </div>
+  </main>
 
+  <script src="https://unpkg.com/pocketbase@0.21.5/dist/pocketbase.umd.js"></script>
+  <script type="module" src="/assets/js/dashboard.js"></script>
 </body>
 </html>
