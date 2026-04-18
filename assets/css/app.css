@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
 :root {
   --pink-main: #ec4899;
   --pink-dark: #be185d;
@@ -84,7 +86,8 @@ textarea {
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 32px 24px;
+  padding: 28px 24px 34px;
+  gap: 10px;
 }
 
 .auth-panel,
@@ -115,19 +118,164 @@ textarea {
 
 .brand-mark {
   margin: 0;
-  font-family: "Baloo 2", cursive;
-  font-size: 2.1rem;
-  line-height: 1;
+  font-family: "Pacifico", cursive;
+  font-size: 2.35rem;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-shadow: 0 6px 16px rgba(123, 17, 63, 0.16);
 }
 
 .brand-mark--large {
-  font-size: clamp(3rem, 12vw, 5rem);
-  text-shadow: 0 4px 12px rgba(123, 17, 63, 0.22);
+  font-size: clamp(3.55rem, 13vw, 5.4rem);
+  line-height: 0.98;
+  text-shadow: 0 8px 18px rgba(123, 17, 63, 0.2);
+}
+
+.image-badge {
+  width: clamp(136px, 34vw, 182px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  margin: 2px 0 4px;
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.52), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 20px 30px rgba(123, 17, 63, 0.18);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.app-image {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.app-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(1.08);
+  filter: drop-shadow(0 10px 18px rgba(123, 17, 63, 0.2));
+}
+
+.image-badge.is-anim-pop .app-image img {
+  animation: panda-pop 420ms ease-out;
+}
+
+@keyframes panda-pop {
+  0% {
+    transform: scale(1.08);
+  }
+  35% {
+    transform: scale(1.2) rotate(-4deg);
+  }
+  68% {
+    transform: scale(0.98) rotate(3deg);
+  }
+  100% {
+    transform: scale(1.08) rotate(0deg);
+  }
+}
+
+.image-badge.is-anim-bounce .app-image img {
+  animation: panda-bounce 480ms cubic-bezier(0.2, 0.8, 0.25, 1);
+}
+
+@keyframes panda-bounce {
+  0% {
+    transform: translateY(0) scale(1.08);
+  }
+  28% {
+    transform: translateY(-12px) scale(1.14);
+  }
+  52% {
+    transform: translateY(0) scale(0.98);
+  }
+  74% {
+    transform: translateY(-4px) scale(1.06);
+  }
+  100% {
+    transform: translateY(0) scale(1.08);
+  }
+}
+
+.image-badge.is-anim-wiggle .app-image img {
+  animation: panda-wiggle 500ms ease-in-out;
+}
+
+@keyframes panda-wiggle {
+  0% {
+    transform: scale(1.08) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.12) rotate(-6deg);
+  }
+  40% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  60% {
+    transform: scale(1.12) rotate(-4deg);
+  }
+  80% {
+    transform: scale(1.09) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.08) rotate(0deg);
+  }
+}
+
+.image-badge.is-anim-glow {
+  animation: panda-glow-shell 520ms ease-out;
+}
+
+.image-badge.is-anim-glow .app-image img {
+  animation: panda-glow 520ms ease-out;
+}
+
+@keyframes panda-glow-shell {
+  0% {
+    box-shadow: 0 20px 30px rgba(123, 17, 63, 0.18);
+  }
+  50% {
+    box-shadow: 0 22px 36px rgba(255, 255, 255, 0.22), 0 22px 34px rgba(123, 17, 63, 0.28);
+  }
+  100% {
+    box-shadow: 0 20px 30px rgba(123, 17, 63, 0.18);
+  }
+}
+
+@keyframes panda-glow {
+  0% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 10px 18px rgba(123, 17, 63, 0.2));
+  }
+  45% {
+    transform: scale(1.16);
+    filter: drop-shadow(0 14px 22px rgba(255, 255, 255, 0.34));
+  }
+  100% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 10px 18px rgba(123, 17, 63, 0.2));
+  }
 }
 
 .auth-subtitle,
 .muted {
-  color: var(--muted);
+  color: var(--pink-soft);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .on-dark,
@@ -497,6 +645,59 @@ textarea {
   border: 1px solid rgba(190, 24, 93, 0.16);
 }
 
+.mobile-records {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.record-card {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(252, 231, 243, 0.95));
+  border: 1px solid rgba(190, 24, 93, 0.12);
+}
+
+.record-card__header,
+.record-card__times,
+.record-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.record-card__date {
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+.record-card__total {
+  font-family: "Baloo 2", cursive;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--pink-dark);
+}
+
+.record-card__times {
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(252, 231, 243, 0.88);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.record-card__notes {
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.record-card__notes strong {
+  color: var(--pink-dark);
+}
+
 .summary-table {
   width: 100%;
   min-width: 720px;
@@ -578,5 +779,21 @@ textarea {
 
   .two-col {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 559px) {
+  .table-wrap {
+    display: none;
+  }
+
+  .metric-card strong {
+    font-size: 2.15rem;
+  }
+}
+
+@media (min-width: 560px) {
+  .mobile-records {
+    display: none;
   }
 }

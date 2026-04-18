@@ -44,7 +44,8 @@ function setupForm() {
 
     if (totalMinutes <= 0) {
       status.hidden = false;
-      status.className = "status-card error";
+      status.className =
+        "mt-4 rounded-[1.3rem] border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700";
       status.textContent = "Revisa las horas de inicio y termino antes de guardar.";
       return;
     }
@@ -61,7 +62,8 @@ function setupForm() {
 
     await createExtraHour(payload);
     status.hidden = false;
-    status.className = "status-card success";
+    status.className =
+      "mt-4 rounded-[1.3rem] border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-bold text-emerald-700";
     status.textContent = "Registro guardado correctamente.";
     form.reset();
     dateInput.value = `${DEFAULT_MONTH}-18`;

@@ -6,43 +6,142 @@
   <title>DalisApp | Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/app.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dali: {
+              50: "#fff4fa",
+              100: "#fce7f3",
+              200: "#fbcfe8",
+              500: "#ec4899",
+              600: "#db2777",
+              700: "#be185d",
+            },
+          },
+          fontFamily: {
+            body: ["Nunito", "sans-serif"],
+            brand: ["Pacifico", "cursive"],
+          },
+          boxShadow: {
+            shell: "0 18px 40px rgba(190, 24, 93, 0.22)",
+            soft: "0 20px 30px rgba(123, 17, 63, 0.18)",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .image-badge.is-anim-pop .app-image img {
+      animation: panda-pop 420ms ease-out;
+    }
+
+    .image-badge.is-anim-bounce .app-image img {
+      animation: panda-bounce 480ms cubic-bezier(0.2, 0.8, 0.25, 1);
+    }
+
+    .image-badge.is-anim-wiggle .app-image img {
+      animation: panda-wiggle 500ms ease-in-out;
+    }
+
+    .image-badge.is-anim-glow {
+      animation: panda-glow-shell 520ms ease-out;
+    }
+
+    .image-badge.is-anim-glow .app-image img {
+      animation: panda-glow 520ms ease-out;
+    }
+
+    @keyframes panda-pop {
+      0% { transform: scale(1.1); }
+      35% { transform: scale(1.22) rotate(-4deg); }
+      68% { transform: scale(1) rotate(3deg); }
+      100% { transform: scale(1.1) rotate(0deg); }
+    }
+
+    @keyframes panda-bounce {
+      0% { transform: translateY(0) scale(1.1); }
+      28% { transform: translateY(-12px) scale(1.16); }
+      52% { transform: translateY(0) scale(1); }
+      74% { transform: translateY(-4px) scale(1.08); }
+      100% { transform: translateY(0) scale(1.1); }
+    }
+
+    @keyframes panda-wiggle {
+      0% { transform: scale(1.1) rotate(0deg); }
+      20% { transform: scale(1.14) rotate(-6deg); }
+      40% { transform: scale(1.12) rotate(5deg); }
+      60% { transform: scale(1.14) rotate(-4deg); }
+      80% { transform: scale(1.11) rotate(2deg); }
+      100% { transform: scale(1.1) rotate(0deg); }
+    }
+
+    @keyframes panda-glow-shell {
+      0% { box-shadow: 0 20px 30px rgba(123, 17, 63, 0.18); }
+      50% { box-shadow: 0 22px 36px rgba(255, 255, 255, 0.22), 0 22px 34px rgba(123, 17, 63, 0.28); }
+      100% { box-shadow: 0 20px 30px rgba(123, 17, 63, 0.18); }
+    }
+
+    @keyframes panda-glow {
+      0% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 10px 18px rgba(123, 17, 63, 0.2));
+      }
+      45% {
+        transform: scale(1.18);
+        filter: drop-shadow(0 14px 22px rgba(255, 255, 255, 0.34));
+      }
+      100% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 10px 18px rgba(123, 17, 63, 0.2));
+      }
+    }
+  </style>
 </head>
-<body class="auth-page">
-  <main class="phone-shell auth-shell">
-    <section class="auth-hero">
-      <div class="brand-mark brand-mark--large">DalisApp</div>
-      <p class="auth-subtitle">Control simple y amable de tus horas extras</p>
+<body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] px-2 py-3 font-body text-slate-900 sm:grid sm:place-items-center sm:p-5">
+  <main class="min-h-[calc(100vh-24px)] w-full overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur md:min-h-[930px] md:max-w-[470px]">
+    <section class="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_40%),linear-gradient(135deg,#f067af_0%,#ec4899_72%)] px-6 pb-8 pt-7 text-center text-white">
+      <div class="mx-auto flex max-w-sm flex-col items-center">
+        <h1 class="font-brand text-[4.35rem] leading-[0.95] tracking-[0.01em] text-white drop-shadow-[0_8px_18px_rgba(123,17,63,0.2)] sm:text-[5.2rem]">DalisApp</h1>
+        <div
+          class="image-badge mt-1 grid aspect-square w-[10.5rem] cursor-pointer place-items-center overflow-hidden rounded-[2.2rem] border border-white/30 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.52),transparent_55%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-2 shadow-soft [touch-action:manipulation] sm:w-[11.5rem]"
+          aria-hidden="true"
+          data-panda-badge
+        >
+          <picture class="app-image grid size-full place-items-center">
+            <img src="/assets/img/panda-rojo.png" alt="Panda rojo decorativo" loading="lazy" class="block size-full scale-110 object-contain object-center drop-shadow-[0_10px_18px_rgba(123,17,63,0.2)]" />
+          </picture>
+        </div>
+        <p class="mt-2 max-w-xs text-center text-[0.85rem] font-extrabold uppercase tracking-[0.16em] text-dali-100 sm:text-[0.92rem]">Control simple y amable de tus horas extras</p>
+      </div>
     </section>
 
-    <section class="auth-panel">
-      <div class="section-heading">
-        <p class="eyebrow">Bienvenida</p>
-        <h1>Iniciar sesion</h1>
-        <p class="muted">Usa PocketBase si ya lo tienes levantado. Si no, puedes entrar en modo demo.</p>
+    <section class="px-7 pb-7 pt-8">
+      <div class="space-y-1">
+        <p class="text-sm font-extrabold uppercase tracking-[0.16em] text-dali-700">Bienvenida</p>
+        <h2 class="text-4xl font-extrabold leading-none text-slate-900">Iniciar sesion</h2>
       </div>
 
-      <form id="login-form" class="stack-md">
-        <label class="field">
-          <span>Correo electronico</span>
-          <input id="email" name="email" type="email" placeholder="dalia@empresa.cl" autocomplete="email" required />
+      <form id="login-form" class="mt-6 space-y-5">
+        <label class="block space-y-2">
+          <span class="text-xl font-bold text-slate-900">Correo electronico</span>
+          <input id="email" name="email" type="email" placeholder="dalia@empresa.cl" autocomplete="email" required class="w-full rounded-[1.45rem] border border-rose-200 bg-white px-5 py-4 text-xl text-slate-700 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
         </label>
 
-        <label class="field">
-          <span>Contrasena</span>
-          <input id="password" name="password" type="password" placeholder="Ingresa tu clave" autocomplete="current-password" required />
+        <label class="block space-y-2">
+          <span class="text-xl font-bold text-slate-900">Contrasena</span>
+          <input id="password" name="password" type="password" placeholder="Ingresa tu clave" autocomplete="current-password" required class="w-full rounded-[1.45rem] border border-rose-200 bg-white px-5 py-4 text-xl text-slate-700 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
         </label>
 
-        <button type="submit" class="btn btn-primary btn-block">Iniciar sesion</button>
+        <button type="submit" class="w-full rounded-full bg-[linear-gradient(180deg,#f04ea5_0%,#be185d_100%)] px-6 py-4 text-2xl font-extrabold text-white shadow-[0_18px_32px_rgba(236,72,153,0.32)] transition hover:translate-y-[-1px] active:translate-y-[1px]">
+          Iniciar sesion
+        </button>
       </form>
 
-      <div id="login-status" class="status-card" hidden></div>
-
-      <div class="auth-hint">
-        <p>Demo rapido</p>
-        <p class="muted">Prueba con cualquier correo y una contrasena de 4 caracteres o mas si PocketBase aun no esta activo.</p>
-      </div>
+      <div id="login-status" class="mt-4 hidden rounded-[1.4rem] border px-4 py-3 text-sm font-bold"></div>
     </section>
   </main>
 

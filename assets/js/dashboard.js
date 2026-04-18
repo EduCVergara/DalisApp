@@ -40,17 +40,17 @@ function paintTimeline(records) {
   if (!container) return;
 
   if (records.length === 0) {
-    container.innerHTML = `<div class="empty-state">No hay movimientos recientes todavia.</div>`;
+    container.innerHTML = `<div class="rounded-[1.35rem] border border-rose-100 bg-white/80 px-5 py-6 text-center font-bold text-slate-500">No hay movimientos recientes todavia.</div>`;
     return;
   }
 
   container.innerHTML = records
     .map(
       (record) => `
-        <article class="timeline-item">
+        <article class="grid gap-1.5 rounded-[1.2rem] bg-dali-100/80 px-4 py-3">
           <strong>${record.type === "earned" ? "Horas ganadas" : "Horas usadas"} - ${formatMinutesLabel(record.total_minutes)}</strong>
-          <span class="timeline-meta">${formatDate(record.date)} · ${record.start_time} a ${record.end_time}</span>
-          <span>${record.notes || "Sin observacion."}</span>
+          <span class="text-sm text-slate-500">${formatDate(record.date)} · ${record.start_time} a ${record.end_time}</span>
+          <span class="text-sm text-slate-700">${record.notes || "Sin observacion."}</span>
         </article>
       `,
     )

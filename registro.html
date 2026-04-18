@@ -6,105 +6,121 @@
   <title>DalisApp | Registrar horas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/app.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dali: { 50: "#fff4fa", 100: "#fce7f3", 200: "#fbcfe8", 500: "#ec4899", 600: "#db2777", 700: "#be185d" },
+          },
+          fontFamily: {
+            body: ["Nunito", "sans-serif"],
+            title: ["Baloo 2", "cursive"],
+          },
+          boxShadow: {
+            shell: "0 18px 40px rgba(190, 24, 93, 0.22)",
+          },
+        },
+      },
+    };
+  </script>
 </head>
-<body data-page="registro">
-  <main class="phone-shell app-shell">
-    <header class="topbar topbar--compact">
-      <div class="row align-center gap-sm">
-        <a href="/dashboard.html" class="back-link" aria-label="Volver al dashboard">Volver</a>
+<body data-page="registro" class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] p-2 font-body text-slate-900 sm:p-5">
+  <main class="mx-auto grid min-h-[calc(100vh-16px)] w-full max-w-[470px] grid-rows-[auto_1fr_auto] overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur">
+    <header class="flex items-center justify-between gap-3 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_40%),linear-gradient(135deg,#f067af_0%,#ec4899_72%)] px-5 py-4 text-white">
+      <div class="flex items-center gap-3">
+        <a href="/dashboard.html" class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px]" aria-label="Volver al dashboard">Volver</a>
         <div>
-          <p class="eyebrow on-dark">Formulario</p>
-          <h1>Agregar horas extras</h1>
+          <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-pink-100">Formulario</p>
+          <h1 class="font-title text-3xl leading-none">Agregar horas extras</h1>
         </div>
       </div>
-      <button class="icon-button" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
+      <button class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px]" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
     </header>
 
-    <section class="content stack-lg">
-      <section class="card">
-        <div class="section-heading">
-          <p class="eyebrow">Nuevo registro</p>
-          <h2>Completa los datos</h2>
+    <section class="space-y-5 overflow-auto px-4 py-5">
+      <section class="rounded-[1.75rem] border border-rose-100 bg-white/75 p-5 shadow-sm">
+        <div>
+          <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Nuevo registro</p>
+          <h2 class="font-title text-3xl leading-none text-slate-900">Completa los datos</h2>
         </div>
 
-        <form id="record-form" class="stack-md">
-          <div class="two-col">
-            <label class="field">
-              <span>Tipo</span>
-              <select id="type" name="type">
+        <form id="record-form" class="mt-5 space-y-4">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block space-y-2">
+              <span class="font-bold text-slate-900">Tipo</span>
+              <select id="type" name="type" class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70">
                 <option value="earned">Horas ganadas</option>
                 <option value="used">Horas usadas</option>
               </select>
             </label>
-
-            <label class="field">
-              <span>Fecha</span>
-              <input id="date" name="date" type="date" required />
+            <label class="block space-y-2">
+              <span class="font-bold text-slate-900">Fecha</span>
+              <input id="date" name="date" type="date" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
             </label>
           </div>
 
-          <div class="two-col">
-            <label class="field">
-              <span>Hora inicio</span>
-              <input id="start_time" name="start_time" type="time" required />
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block space-y-2">
+              <span class="font-bold text-slate-900">Hora inicio</span>
+              <input id="start_time" name="start_time" type="time" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
             </label>
-
-            <label class="field">
-              <span>Hora termino</span>
-              <input id="end_time" name="end_time" type="time" required />
+            <label class="block space-y-2">
+              <span class="font-bold text-slate-900">Hora termino</span>
+              <input id="end_time" name="end_time" type="time" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
             </label>
           </div>
 
-          <label class="field">
-            <span>Total calculado</span>
-            <input id="total_display" name="total_display" type="text" value="00:00 hrs" readonly />
+          <label class="block space-y-2">
+            <span class="font-bold text-slate-900">Total calculado</span>
+            <input id="total_display" name="total_display" type="text" value="00:00 hrs" readonly class="w-full rounded-[1.15rem] border border-rose-200 bg-rose-50 px-4 py-3.5 text-base font-extrabold text-dali-700 outline-none" />
           </label>
 
-          <label class="field">
-            <span>Observacion</span>
-            <textarea id="notes" name="notes" rows="4" placeholder="Ej: soporte de cierre mensual o medio dia administrativo"></textarea>
+          <label class="block space-y-2">
+            <span class="font-bold text-slate-900">Observacion</span>
+            <textarea id="notes" name="notes" rows="4" placeholder="Ej: soporte de cierre mensual o medio dia administrativo" class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70"></textarea>
           </label>
 
-          <div class="button-row">
-            <button type="submit" class="btn btn-primary">Guardar registro</button>
-            <a href="/resumen.html" class="btn btn-secondary">Ver resumen</a>
+          <div class="flex flex-wrap gap-3 pt-1">
+            <button type="submit" class="inline-flex min-h-12 items-center justify-center rounded-full bg-[linear-gradient(180deg,#f04ea5_0%,#be185d_100%)] px-5 text-base font-extrabold text-white shadow-[0_18px_32px_rgba(236,72,153,0.32)] transition hover:translate-y-[-1px]">Guardar registro</button>
+            <a href="/resumen.html" class="inline-flex min-h-12 items-center justify-center rounded-full border border-rose-200 bg-white px-5 text-base font-extrabold text-slate-900 transition hover:bg-rose-50">Ver resumen</a>
           </div>
         </form>
 
-        <div id="record-status" class="status-card" hidden></div>
+        <div id="record-status" class="mt-4 hidden rounded-[1.3rem] border px-4 py-3 text-sm font-bold"></div>
       </section>
 
-      <section class="card card--soft">
-        <div class="row between align-start">
+      <section class="rounded-[1.75rem] border border-rose-100 bg-[linear-gradient(180deg,rgba(252,231,243,0.92),rgba(255,255,255,0.82))] p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-3">
           <div>
-            <p class="eyebrow">Ayuda visual</p>
-            <h2>Como se interpreta</h2>
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Ayuda visual</p>
+            <h2 class="font-title text-3xl leading-none text-slate-900">Como se interpreta</h2>
           </div>
-          <span class="tag">MVP</span>
+          <span class="rounded-full bg-dali-100 px-3 py-2 text-xs font-extrabold text-dali-700">MVP</span>
         </div>
-        <div class="summary-list">
-          <div>
-            <span>Horas ganadas</span>
-            <strong>Suman al disponible</strong>
+        <div class="mt-4 grid gap-3">
+          <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+            <span class="font-bold text-slate-500">Horas ganadas</span>
+            <strong class="font-extrabold text-slate-900">Suman al disponible</strong>
           </div>
-          <div>
-            <span>Horas usadas</span>
-            <strong>Descuentan del saldo</strong>
+          <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+            <span class="font-bold text-slate-500">Horas usadas</span>
+            <strong class="font-extrabold text-slate-900">Descuentan del saldo</strong>
           </div>
-          <div>
-            <span>Total</span>
-            <strong>Se calcula automaticamente</strong>
+          <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+            <span class="font-bold text-slate-500">Total</span>
+            <strong class="font-extrabold text-slate-900">Se calcula automaticamente</strong>
           </div>
         </div>
       </section>
     </section>
 
-    <nav class="bottom-nav">
-      <a href="/dashboard.html" data-nav="dashboard">Inicio</a>
-      <a href="/registro.html" data-nav="registro">Registro</a>
-      <a href="/resumen.html" data-nav="resumen">Resumen</a>
+    <nav class="grid grid-cols-3 gap-2 border-t border-rose-100 bg-white/90 p-2">
+      <a href="/dashboard.html" data-nav="dashboard" class="inline-flex min-h-12 items-center justify-center rounded-2xl px-3 text-sm font-extrabold text-slate-500 transition">Inicio</a>
+      <a href="/registro.html" data-nav="registro" class="inline-flex min-h-12 items-center justify-center rounded-2xl px-3 text-sm font-extrabold text-slate-500 transition">Registro</a>
+      <a href="/resumen.html" data-nav="resumen" class="inline-flex min-h-12 items-center justify-center rounded-2xl px-3 text-sm font-extrabold text-slate-500 transition">Resumen</a>
     </nav>
   </main>
 

@@ -6,111 +6,133 @@
   <title>DalisApp | Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/css/app.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dali: { 50: "#fff4fa", 100: "#fce7f3", 200: "#fbcfe8", 500: "#ec4899", 600: "#db2777", 700: "#be185d" },
+          },
+          fontFamily: {
+            body: ["Nunito", "sans-serif"],
+            title: ["Baloo 2", "cursive"],
+            brand: ["Pacifico", "cursive"],
+          },
+          boxShadow: {
+            shell: "0 18px 40px rgba(190, 24, 93, 0.22)",
+          },
+        },
+      },
+    };
+  </script>
 </head>
-<body data-page="dashboard">
-  <main class="phone-shell app-shell">
-    <header class="topbar">
-      <div>
-        <p class="brand-mark">DalisApp</p>
-        <p class="muted on-dark">Hola, <span data-user-name>Dalia</span></p>
-      </div>
-      <div class="topbar-actions">
-        <a class="btn btn-ghost" href="/registro.html">Agregar horas</a>
-        <button class="icon-button" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
+<body data-page="dashboard" class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] p-2 font-body text-slate-900 sm:p-5">
+  <main class="mx-auto grid min-h-[calc(100vh-16px)] w-full max-w-[470px] grid-rows-[auto_1fr_auto] overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur">
+    <header class="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_40%),linear-gradient(135deg,#f067af_0%,#ec4899_72%)] px-5 py-4 text-white">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <p class="font-brand text-[2rem] leading-none">DalisApp</p>
+          <p class="mt-1 text-sm font-bold text-pink-100">Hola, <span data-user-name>Dalia</span></p>
+        </div>
+        <div class="flex gap-2">
+          <a class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px]" href="/registro.html">Agregar horas</a>
+          <button class="inline-flex min-h-11 items-center justify-center rounded-full border border-white/45 bg-white/15 px-4 text-sm font-extrabold text-white backdrop-blur transition hover:translate-y-[-1px]" type="button" data-logout aria-label="Cerrar sesion">Salir</button>
+        </div>
       </div>
     </header>
 
-    <section class="content stack-lg">
-      <div class="section-heading centered">
-        <p class="eyebrow">Dashboard</p>
-        <h1>Resumen de horas extras</h1>
+    <section class="space-y-5 overflow-auto px-4 py-5">
+      <div class="text-center">
+        <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Dashboard</p>
+        <h1 class="font-title text-[2rem] leading-none text-slate-900">Resumen de horas extras</h1>
       </div>
 
-      <section class="card-grid card-grid--stats">
-        <article class="metric-card metric-card--primary">
-          <p>Horas acumuladas</p>
-          <strong data-earned-total>00:00</strong>
-          <span>hrs ganadas</span>
+      <section class="grid grid-cols-2 gap-3">
+        <article class="rounded-[1.7rem] bg-[linear-gradient(180deg,#f675b5_0%,#ec4899_100%)] p-4 text-white shadow-lg">
+          <p class="text-sm font-bold text-pink-100">Horas acumuladas</p>
+          <strong data-earned-total class="mt-2 block font-title text-5xl leading-none">00:00</strong>
+          <span class="text-sm font-bold text-pink-100">hrs ganadas</span>
         </article>
-        <article class="metric-card metric-card--secondary">
-          <p>Horas usadas</p>
-          <strong data-used-total>00:00</strong>
-          <span>hrs utilizadas</span>
+        <article class="rounded-[1.7rem] bg-[linear-gradient(180deg,#d94b92_0%,#be185d_100%)] p-4 text-white shadow-lg">
+          <p class="text-sm font-bold text-pink-100">Horas usadas</p>
+          <strong data-used-total class="mt-2 block font-title text-5xl leading-none">00:00</strong>
+          <span class="text-sm font-bold text-pink-100">hrs utilizadas</span>
         </article>
-        <article class="metric-card metric-card--light">
-          <p>Saldo disponible</p>
-          <strong data-balance-total>00:00</strong>
-          <span>hrs restantes</span>
+        <article class="col-span-2 rounded-[1.7rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(252,231,243,0.98))] p-4 text-slate-900 shadow-lg">
+          <p class="text-sm font-bold text-slate-500">Saldo disponible</p>
+          <strong data-balance-total class="mt-2 block font-title text-5xl leading-none text-dali-700">00:00</strong>
+          <span class="text-sm font-bold text-slate-500">hrs restantes</span>
         </article>
       </section>
 
-      <section class="card card--soft">
-        <div class="row between align-start">
+      <section class="rounded-[1.75rem] border border-rose-100 bg-[linear-gradient(180deg,rgba(252,231,243,0.92),rgba(255,255,255,0.82))] p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-3">
           <div>
-            <p class="eyebrow">Resumen mensual</p>
-            <h2 data-current-month-label>Abril 2026</h2>
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Resumen mensual</p>
+            <h2 data-current-month-label class="font-title text-3xl leading-none text-slate-900">Abril 2026</h2>
           </div>
-          <a href="/resumen.html" class="link-strong">Ver detalle</a>
+          <a href="/resumen.html" class="text-sm font-extrabold text-dali-700">Ver detalle</a>
         </div>
-
-        <div class="summary-list">
-          <div>
-            <span>Trabajadas este mes</span>
-            <strong data-summary-earned>00:00 hrs</strong>
+        <div class="mt-4 grid gap-3">
+          <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+            <span class="font-bold text-slate-500">Trabajadas este mes</span>
+            <strong data-summary-earned class="text-lg font-extrabold text-slate-900">00:00 hrs</strong>
           </div>
-          <div>
-            <span>Usadas este mes</span>
-            <strong data-summary-used>00:00 hrs</strong>
+          <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+            <span class="font-bold text-slate-500">Usadas este mes</span>
+            <strong data-summary-used class="text-lg font-extrabold text-slate-900">00:00 hrs</strong>
           </div>
-          <div>
-            <span>Saldo del mes</span>
-            <strong data-summary-balance>00:00 hrs</strong>
+          <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+            <span class="font-bold text-slate-500">Saldo del mes</span>
+            <strong data-summary-balance class="text-lg font-extrabold text-slate-900">00:00 hrs</strong>
           </div>
         </div>
       </section>
 
-      <section class="card">
-        <div class="row between align-start">
+      <section class="rounded-[1.75rem] border border-rose-100 bg-white/75 p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-3">
           <div>
-            <p class="eyebrow">Visual rapido</p>
-            <h2>Comparacion mensual</h2>
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Visual rapido</p>
+            <h2 class="font-title text-3xl leading-none text-slate-900">Comparacion mensual</h2>
           </div>
-          <span class="tag">Primera version</span>
+          <span class="rounded-full bg-dali-100 px-3 py-2 text-xs font-extrabold text-dali-700">Primera version</span>
         </div>
-        <div class="chart-row">
-          <div class="chart-bars" aria-hidden="true">
-            <div class="chart-col">
-              <span class="chart-value" data-chart-earned>0h</span>
-              <div class="chart-track"><i data-chart-earned-bar></i></div>
-              <small>Ganadas</small>
+        <div class="mt-5 grid grid-cols-2 gap-4" aria-hidden="true">
+          <div class="text-center">
+            <span data-chart-earned class="mb-3 block text-base font-black text-dali-700">0h</span>
+            <div class="flex h-44 items-end justify-center rounded-[1.4rem] bg-[linear-gradient(180deg,rgba(236,72,153,0.12),rgba(236,72,153,0.22))] p-3">
+              <i data-chart-earned-bar class="block w-full max-w-[78px] rounded-t-[18px] rounded-b-[10px] bg-[linear-gradient(180deg,#ff8ac7_0%,#be185d_100%)]" style="min-height:14px;"></i>
             </div>
-            <div class="chart-col">
-              <span class="chart-value" data-chart-used>0h</span>
-              <div class="chart-track chart-track--pale"><i data-chart-used-bar></i></div>
-              <small>Usadas</small>
+            <small class="mt-2 block font-bold text-slate-500">Ganadas</small>
+          </div>
+          <div class="text-center">
+            <span data-chart-used class="mb-3 block text-base font-black text-dali-700">0h</span>
+            <div class="flex h-44 items-end justify-center rounded-[1.4rem] bg-[linear-gradient(180deg,rgba(190,24,93,0.08),rgba(190,24,93,0.16))] p-3">
+              <i data-chart-used-bar class="block w-full max-w-[78px] rounded-t-[18px] rounded-b-[10px] bg-[linear-gradient(180deg,#ff8ac7_0%,#be185d_100%)]" style="min-height:14px;"></i>
             </div>
+            <small class="mt-2 block font-bold text-slate-500">Usadas</small>
           </div>
         </div>
       </section>
 
-      <section class="card">
-        <div class="row between align-start">
+      <section class="rounded-[1.75rem] border border-rose-100 bg-white/75 p-5 shadow-sm">
+        <div class="flex items-start justify-between gap-3">
           <div>
-            <p class="eyebrow">Ultimos movimientos</p>
-            <h2>Actividad reciente</h2>
+            <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-dali-700">Ultimos movimientos</p>
+            <h2 class="font-title text-3xl leading-none text-slate-900">Actividad reciente</h2>
           </div>
-          <a href="/registro.html" class="link-strong">Nuevo registro</a>
+          <a href="/registro.html" class="text-sm font-extrabold text-dali-700">Nuevo registro</a>
         </div>
-        <div class="timeline" data-recent-records></div>
+        <div class="mt-4 grid gap-3" data-recent-records></div>
       </section>
     </section>
 
-    <nav class="bottom-nav">
-      <a href="/dashboard.html" data-nav="dashboard">Inicio</a>
-      <a href="/registro.html" data-nav="registro">Registro</a>
-      <a href="/resumen.html" data-nav="resumen">Resumen</a>
+    <nav class="grid grid-cols-3 gap-2 border-t border-rose-100 bg-white/90 p-2">
+      <a href="/dashboard.html" data-nav="dashboard" class="inline-flex min-h-12 items-center justify-center rounded-2xl px-3 text-sm font-extrabold text-slate-500 transition">Inicio</a>
+      <a href="/registro.html" data-nav="registro" class="inline-flex min-h-12 items-center justify-center rounded-2xl px-3 text-sm font-extrabold text-slate-500 transition">Registro</a>
+      <a href="/resumen.html" data-nav="resumen" class="inline-flex min-h-12 items-center justify-center rounded-2xl px-3 text-sm font-extrabold text-slate-500 transition">Resumen</a>
     </nav>
   </main>
 
