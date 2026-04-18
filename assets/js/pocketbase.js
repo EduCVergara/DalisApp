@@ -1,8 +1,9 @@
 import { DEFAULT_MONTH, getMonthKey } from "/assets/js/utils.js";
 
 const AUTH_KEY = "dalisapp.auth";
-const ENV_PB_URL = String(import.meta.env.VITE_POCKETBASE_URL || "").trim();
-const ENV_APP_URL = String(import.meta.env.VITE_APP_URL || window.location.origin || "").trim();
+const RUNTIME_CONFIG = window.__DALISAPP_CONFIG__ || {};
+const ENV_PB_URL = String(RUNTIME_CONFIG.VITE_POCKETBASE_URL || import.meta.env.VITE_POCKETBASE_URL || "").trim();
+const ENV_APP_URL = String(RUNTIME_CONFIG.VITE_APP_URL || import.meta.env.VITE_APP_URL || window.location.origin || "").trim();
 const DEFAULT_PB_URL = ENV_PB_URL || "http://127.0.0.1:8090";
 const DEFAULT_APP_URL = ENV_APP_URL || window.location.origin;
 

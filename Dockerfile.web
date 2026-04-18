@@ -16,7 +16,9 @@ RUN npm install -g serve
 
 COPY --from=build /app/dist ./dist
 COPY serve.json ./serve.json
+COPY scripts/start-web.sh ./start-web.sh
+RUN chmod +x /app/start-web.sh
 
 ENV PORT=3000
 
-CMD ["sh", "-c", "serve -c /app/serve.json -l ${PORT} dist"]
+CMD ["/app/start-web.sh"]
