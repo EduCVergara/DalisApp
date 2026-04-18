@@ -1,7 +1,18 @@
 import { getCurrentUser, listExtraHours, signOut } from "/assets/js/pocketbase.js";
-import { formatDate, formatMinutesLabel, getMonthLabel, summarizeRecords } from "/assets/js/utils.js";
+import { setupInteractiveFeedback } from "/assets/js/interactions.js";
+import {
+  buildYearHistory,
+  formatDate,
+  formatMinutesLabel,
+  getAvailableYears,
+  getCurrentMonthKey,
+  getMonthLabel,
+  getYearKey,
+  summarizeRecords,
+} from "/assets/js/utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  setupInteractiveFeedback();
   hydrateShell();
   await renderSummaryPage();
 });
@@ -34,12 +45,28 @@ export function hydrateShell() {
 
 async function renderSummaryPage() {
   const monthInput = document.querySelector("#month-filter");
+  const yearInput = document.querySelector("#year-filter");
   const tableBody = document.querySelector("[data-summary-table-body]");
   const cardsContainer = document.querySelector("[data-summary-cards]");
+  const yearCardsContainer = document.querySelector("[data-year-history-cards]");
+  const yearTotal = document.querySelector("[data-year-total]");
   if (!monthInput || !tableBody || !cardsContainer) return;
 
-  monthInput.value = "2026-04";
-  const paint = async () => {
+  const allRecords = await listExtraHours();
+  const currentMonthKey = getCurrentMonthKey();
+  const currentYear = getYearKey(currentMonthKey);
+  const availableYears = getAvailableYears(allRecords);
+
+  monthInput.value = currentMonthKey;
+
+  if (yearInput) {
+    yearInput.innerHTML = availableYears
+      .map((year) => `<option value="${year}">${year}</option>`)
+      .join("");
+    yearInput.value = availableYears.includes(currentYear) ? currentYear : availableYears[0];
+  }
+
+  const paintMonth = async () => {
     const records = await listExtraHours(monthInput.value);
     const summary = summarizeRecords(records);
     const title = document.querySelector("[data-table-title]");
@@ -93,6 +120,57 @@ async function renderSummaryPage() {
       .join("");
   };
 
-  monthInput.addEventListener("change", paint);
-  await paint();
+  const paintYear = () => {
+    if (!yearInput || !yearCardsContainer || !yearTotal) return;
+
+    const history = buildYearHistory(allRecords, yearInput.value);
+    const total = history.at(-1)?.cumulativeBalance || 0;
+    yearTotal.textContent = formatMinutesLabel(total);
+
+    if (history.length === 0) {
+      yearCardsContainer.innerHTML = `
+        <div class="rounded-[1.35rem] border border-rose-100 bg-white/80 px-5 py-6 text-center font-bold text-slate-500">
+          Todavia no hay registros para este año.
+        </div>
+      `;
+      return;
+    }
+
+    yearCardsContainer.innerHTML = history
+      .map(
+        (item) => `
+          <article class="rounded-[1.35rem] border border-rose-100 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(252,231,243,0.95))] p-4">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-black text-slate-900">${item.label}</h3>
+                <p class="text-sm font-bold text-slate-500">${item.count} movimiento${item.count === 1 ? "" : "s"}</p>
+              </div>
+              <span class="inline-flex items-center rounded-full bg-dali-100 px-3 py-1 text-xs font-black text-dali-700">
+                Acumulado ${formatMinutesLabel(item.cumulativeBalance)}
+              </span>
+            </div>
+            <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+              <div class="rounded-[1rem] bg-dali-100/80 px-3 py-3">
+                <span class="block text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-dali-700">Ganadas</span>
+                <strong class="mt-1 block text-sm font-black text-dali-700">${formatMinutesLabel(item.earned)}</strong>
+              </div>
+              <div class="rounded-[1rem] bg-orange-50 px-3 py-3">
+                <span class="block text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-orange-700">Usadas</span>
+                <strong class="mt-1 block text-sm font-black text-orange-700">${formatMinutesLabel(item.used)}</strong>
+              </div>
+              <div class="rounded-[1rem] bg-rose-50 px-3 py-3">
+                <span class="block text-[0.68rem] font-extrabold uppercase tracking-[0.14em] text-slate-700">Saldo mes</span>
+                <strong class="mt-1 block text-sm font-black text-slate-900">${formatMinutesLabel(item.balance)}</strong>
+              </div>
+            </div>
+          </article>
+        `,
+      )
+      .join("");
+  };
+
+  monthInput.addEventListener("change", paintMonth);
+  yearInput?.addEventListener("change", paintYear);
+  await paintMonth();
+  paintYear();
 }

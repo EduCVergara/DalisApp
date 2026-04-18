@@ -87,6 +87,17 @@ export function getMonthKey(dateValue) {
   return String(dateValue).slice(0, 7);
 }
 
+export function getYearKey(value) {
+  if (!value) return String(new Date().getFullYear());
+  return String(value).slice(0, 4);
+}
+
+export function getCurrentMonthKey() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  return `${now.getFullYear()}-${month}`;
+}
+
 export function formatDate(dateValue) {
   if (!dateValue) return "--/--/----";
   const [year, month, day] = String(dateValue).split("-");
@@ -125,6 +136,64 @@ export function sortByNewest(records) {
     const right = `${b.date || ""} ${b.start_time || ""}`;
     return right.localeCompare(left);
   });
+}
+
+export function sortByOldest(records) {
+  return [...records].sort((a, b) => {
+    const left = `${a.date || ""} ${a.start_time || ""}`;
+    const right = `${b.date || ""} ${b.start_time || ""}`;
+    return left.localeCompare(right);
+  });
+}
+
+export function getAvailableYears(records) {
+  const years = new Set(
+    records
+      .map((record) => getYearKey(record.month_key || record.date))
+      .filter(Boolean),
+  );
+
+  if (years.size === 0) {
+    years.add(getYearKey(DEFAULT_MONTH));
+  }
+
+  return [...years].sort((left, right) => right.localeCompare(left));
+}
+
+export function filterRecordsByYear(records, yearKey) {
+  return records.filter((record) => getYearKey(record.month_key || record.date) === String(yearKey));
+}
+
+export function buildYearHistory(records, yearKey) {
+  const yearlyRecords = sortByOldest(filterRecordsByYear(records, yearKey));
+  const monthsMap = new Map();
+
+  yearlyRecords.forEach((record) => {
+    const monthKey = getMonthKey(record.month_key || record.date);
+    if (!monthsMap.has(monthKey)) {
+      monthsMap.set(monthKey, []);
+    }
+    monthsMap.get(monthKey).push(record);
+  });
+
+  let runningBalance = 0;
+
+  return [...monthsMap.entries()]
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([monthKey, monthRecords]) => {
+      const summary = summarizeRecords(monthRecords);
+      runningBalance += summary.balance;
+
+      return {
+        monthKey,
+        label: getMonthLabel(monthKey),
+        earned: summary.earned,
+        used: summary.used,
+        balance: summary.balance,
+        cumulativeBalance: runningBalance,
+        count: monthRecords.length,
+      };
+    });
 }
 
 export function uid(prefix = "id") {

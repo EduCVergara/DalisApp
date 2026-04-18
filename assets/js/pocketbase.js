@@ -73,14 +73,10 @@ function normalizePocketBaseError(error, fallbackMessage) {
   return fallbackMessage;
 }
 
-function withEndpointHint(message) {
-  return `${message} Endpoint: ${DEFAULT_PB_URL}`;
-}
-
 function requirePbClient() {
   const pb = getPbClient();
   if (!pb) {
-    throw new Error(withEndpointHint("PocketBase no esta disponible en este navegador."));
+    throw new Error("PocketBase no esta disponible en este navegador.");
   }
   return pb;
 }
@@ -88,7 +84,7 @@ function requirePbClient() {
 function requireAuthenticatedUser() {
   const user = getCurrentUser();
   if (!user) {
-    throw new Error("Tu sesion expiró. Vuelve a iniciar sesion.");
+    throw new Error("Tu sesion expiró. Vuelve a iniciar sesión.");
   }
   return user;
 }
@@ -145,11 +141,9 @@ export async function signIn(email, password) {
     return { user, mode: "pocketbase" };
   } catch (error) {
     throw new Error(
-      withEndpointHint(
-        normalizePocketBaseError(
-          error,
-          "No fue posible iniciar sesion. Verifica tu correo, contrasena o el estado de PocketBase.",
-        ),
+      normalizePocketBaseError(
+        error,
+        "No fue posible iniciar sesión. Verifica tu correo, contraseña o el estado de PocketBase.",
       ),
     );
   }
@@ -162,7 +156,7 @@ export async function listExtraHours(monthKey = "") {
   const authUserId = pb.authStore.model?.id;
 
   if (!authUserId) {
-    throw new Error("No hay una sesion valida en PocketBase.");
+    throw new Error("No hay una sesion válida en PocketBase.");
   }
 
   try {
@@ -186,9 +180,7 @@ export async function listExtraHours(monthKey = "") {
     }));
   } catch (error) {
     throw new Error(
-      withEndpointHint(
-        normalizePocketBaseError(error, "No fue posible cargar los registros de horas extra."),
-      ),
+      normalizePocketBaseError(error, "No fue posible cargar los registros de horas extra."),
     );
   }
 }
@@ -199,7 +191,7 @@ export async function createExtraHour(payload) {
   const authUserId = pb.authStore.model?.id;
 
   if (!authUserId) {
-    throw new Error("No hay una sesion valida en PocketBase.");
+    throw new Error("No hay una sesion válida en PocketBase.");
   }
 
   const normalizedRecord = {
@@ -226,8 +218,6 @@ export async function createExtraHour(payload) {
 
     return { ...normalizedRecord, id: saved.id, user: authUserId };
   } catch (error) {
-    throw new Error(
-      withEndpointHint(normalizePocketBaseError(error, "No fue posible guardar el registro.")),
-    );
+    throw new Error(normalizePocketBaseError(error, "No fue posible guardar el registro."));
   }
 }

@@ -19,11 +19,29 @@ function setupForm() {
 
   dateInput.value = `${DEFAULT_MONTH}-18`;
 
+  const normalizeTimeField = (input) => {
+    const digits = input.value.replace(/\D/g, "").slice(0, 4);
+
+    if (digits.length <= 2) {
+      input.value = digits;
+      return;
+    }
+
+    input.value = `${digits.slice(0, 2)}:${digits.slice(2)}`;
+  };
+
+  const isValidTimeValue = (value) => /^([01]\d|2[0-3]):([0-5]\d)$/.test(value);
+
   const recalculate = () => {
     const totalMinutes = calculateWorkedMinutes(startInput.value, endInput.value);
     if (!startInput.value || !endInput.value) {
       totalInput.value = "00:00 hrs";
       return 0;
+    }
+
+    if (!isValidTimeValue(startInput.value) || !isValidTimeValue(endInput.value)) {
+      totalInput.value = "Hora invalida";
+      return -1;
     }
 
     if (totalMinutes <= 0) {
@@ -35,8 +53,15 @@ function setupForm() {
     return totalMinutes;
   };
 
-  startInput.addEventListener("input", recalculate);
-  endInput.addEventListener("input", recalculate);
+  startInput.addEventListener("input", () => {
+    normalizeTimeField(startInput);
+    recalculate();
+  });
+
+  endInput.addEventListener("input", () => {
+    normalizeTimeField(endInput);
+    recalculate();
+  });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();

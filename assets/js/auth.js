@@ -1,6 +1,8 @@
 import { getCurrentUser, signIn } from "/assets/js/pocketbase.js";
+import { setupInteractiveFeedback } from "/assets/js/interactions.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  setupInteractiveFeedback();
   const existingUser = getCurrentUser();
   if (existingUser) {
     window.location.replace("/dashboard.html");
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       status.hidden = false;
       status.className =
         "mt-4 rounded-[1.4rem] border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-700";
-      status.textContent = error.message || "No fue posible iniciar sesion.";
+      status.textContent = error.message || "No fue posible iniciar sesión.";
     }
   });
 });

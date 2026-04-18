@@ -53,7 +53,7 @@
             <label class="block space-y-2">
               <span class="font-bold text-slate-900">Tipo</span>
               <select id="type" name="type" class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70">
-                <option value="earned">Horas ganadas</option>
+                <option value="earned">Horas realizadas</option>
                 <option value="used">Horas usadas</option>
               </select>
             </label>
@@ -66,11 +66,11 @@
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="block space-y-2">
               <span class="font-bold text-slate-900">Hora inicio</span>
-              <input id="start_time" name="start_time" type="time" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
+              <input id="start_time" name="start_time" type="text" inputmode="numeric" placeholder="16:00" maxlength="5" pattern="^([01][0-9]|2[0-3]):[0-5][0-9]$" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
             </label>
             <label class="block space-y-2">
-              <span class="font-bold text-slate-900">Hora termino</span>
-              <input id="end_time" name="end_time" type="time" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
+              <span class="font-bold text-slate-900">Hora término</span>
+              <input id="end_time" name="end_time" type="text" inputmode="numeric" placeholder="18:30" maxlength="5" pattern="^([01][0-9]|2[0-3]):[0-5][0-9]$" required class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70" />
             </label>
           </div>
 
@@ -80,8 +80,8 @@
           </label>
 
           <label class="block space-y-2">
-            <span class="font-bold text-slate-900">Observacion</span>
-            <textarea id="notes" name="notes" rows="4" placeholder="Ej: soporte de cierre mensual o medio dia administrativo" class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70"></textarea>
+            <span class="font-bold text-slate-900">Observación</span>
+            <textarea id="notes" name="notes" rows="4" placeholder="Ej: Chocolatada navideña o medio dia administrativo" class="w-full rounded-[1.15rem] border border-rose-200 bg-white px-4 py-3.5 text-base text-slate-700 outline-none transition focus:border-dali-500 focus:ring-4 focus:ring-dali-200/70"></textarea>
           </label>
 
           <div class="flex flex-wrap gap-3 pt-1">
@@ -103,7 +103,7 @@
         </div>
         <div class="mt-4 grid gap-3">
           <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
-            <span class="font-bold text-slate-500">Horas ganadas</span>
+            <span class="font-bold text-slate-500">Horas realizadas</span>
             <strong class="font-extrabold text-slate-900">Suman al disponible</strong>
           </div>
           <div class="flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
