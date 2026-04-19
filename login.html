@@ -40,6 +40,194 @@
       filter: drop-shadow(0 2px 6px rgba(236, 72, 153, 0.22));
     }
 
+    .brand-glamour {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      isolation: isolate;
+      margin-top: 0.15rem;
+      padding: 0.65rem 1rem 0.45rem;
+    }
+
+    .brand-glamour__title {
+      position: relative;
+      z-index: 3;
+    }
+
+    .brand-glamour__halo {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: min(92vw, 22rem);
+      height: 9rem;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .brand-glamour__halo--blur {
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.34), transparent 22%),
+        radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.28), transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.16), transparent 42%);
+      filter: blur(16px);
+      opacity: 0.8;
+      animation: glamour-halo-breathe 6.8s ease-in-out infinite;
+    }
+
+    .brand-glamour__sparkles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .brand-glamour__spark {
+      position: absolute;
+      left: var(--spark-left, 50%);
+      top: var(--spark-top, 50%);
+      width: var(--spark-size, 12px);
+      height: var(--spark-size, 12px);
+      transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      transform-origin: center;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(242, 244, 247, 0.95) 36%, rgba(216, 221, 230, 0.72) 58%, rgba(216, 221, 230, 0) 78%);
+      box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.92),
+        0 0 22px rgba(226, 232, 240, 0.72),
+        0 0 36px rgba(255, 255, 255, 0.34);
+      opacity: 0;
+      animation: glamour-spark-drift var(--spark-duration, 3.8s) ease-in-out infinite;
+      animation-delay: var(--spark-delay, 0s);
+    }
+
+    .brand-glamour__spark::before,
+    .brand-glamour__spark::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(219, 224, 232, 0.22));
+      opacity: 0.95;
+    }
+
+    .brand-glamour__spark::before {
+      width: 2px;
+      height: calc(var(--spark-size, 12px) * 1.9);
+    }
+
+    .brand-glamour__spark::after {
+      width: calc(var(--spark-size, 12px) * 1.9);
+      height: 2px;
+    }
+
+    .panda-glow-wrap {
+      position: relative;
+      display: grid;
+      place-items: center;
+      margin-top: 0.25rem;
+      isolation: isolate;
+    }
+
+    .panda-glow-wrap__sparkles {
+      position: absolute;
+      inset: -0.9rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .panda-glow-wrap__spark {
+      position: absolute;
+      left: var(--panda-spark-left, 50%);
+      top: var(--panda-spark-top, 50%);
+      width: var(--panda-spark-size, 14px);
+      height: var(--panda-spark-size, 14px);
+      transform: translate(-50%, -50%) scale(0.48) rotate(0deg);
+      transform-origin: center;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(245, 247, 250, 0.96) 34%, rgba(226, 232, 240, 0.78) 56%, rgba(226, 232, 240, 0) 78%);
+      box-shadow:
+        0 0 12px rgba(255, 255, 255, 0.92),
+        0 0 24px rgba(226, 232, 240, 0.56),
+        0 0 40px rgba(255, 255, 255, 0.22);
+      opacity: 0;
+      animation: panda-spark-drift var(--panda-spark-duration, 4.8s) ease-in-out infinite;
+      animation-delay: var(--panda-spark-delay, 0s);
+    }
+
+    .panda-glow-wrap__spark::before,
+    .panda-glow-wrap__spark::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(226, 232, 240, 0.18));
+      opacity: 0.92;
+    }
+
+    .panda-glow-wrap__spark::before {
+      width: 2px;
+      height: calc(var(--panda-spark-size, 14px) * 2.2);
+    }
+
+    .panda-glow-wrap__spark::after {
+      width: calc(var(--panda-spark-size, 14px) * 2.2);
+      height: 2px;
+    }
+
+    .panda-glow-wrap__halo {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: calc(100% + 4rem);
+      height: calc(100% + 4rem);
+      transform: translate(-50%, -50%);
+      border-radius: 2.8rem;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 46%, rgba(255, 255, 255, 0.34), transparent 34%),
+        radial-gradient(circle at 50% 50%, rgba(231, 236, 243, 0.18), transparent 64%);
+      filter: blur(18px);
+      opacity: 0.66;
+      animation: panda-halo-breathe 5.2s ease-in-out infinite;
+    }
+
+    .slogan-glow {
+      position: relative;
+      display: inline-block;
+      isolation: isolate;
+      margin-top: 0.45rem;
+      padding: 0.35rem 1rem;
+    }
+
+    .slogan-glow__halo {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: calc(100% + 2.4rem);
+      height: calc(100% + 1.15rem);
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4), transparent 44%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(237, 242, 247, 0.4), rgba(255, 255, 255, 0));
+      filter: blur(13px);
+      opacity: 0.76;
+      animation: slogan-halo-breathe 4.9s ease-in-out infinite;
+    }
+
+    .slogan-glow__text {
+      position: relative;
+      z-index: 1;
+    }
+
     .floating-field {
       position: relative;
     }
@@ -150,23 +338,122 @@
         transform: scale(1.02);
       }
     }
+
+    @keyframes glamour-spark-drift {
+      0%,
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.52) rotate(0deg);
+      }
+      18% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(0.96) rotate(95deg);
+      }
+      42% {
+        opacity: 0.88;
+        transform: translate(-50%, -50%) scale(1.12) rotate(200deg);
+      }
+      68% {
+        opacity: 0.32;
+        transform: translate(-50%, -50%) scale(0.82) rotate(300deg);
+      }
+    }
+
+    @keyframes glamour-halo-breathe {
+      0%,
+      100% {
+        opacity: 0.66;
+        transform: translate(-50%, -50%) scale(0.96);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.04);
+      }
+    }
+
+    @keyframes panda-halo-breathe {
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+      50% {
+        opacity: 0.78;
+        transform: translate(-50%, -50%) scale(1.04);
+      }
+    }
+
+    @keyframes panda-spark-drift {
+      0%,
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.46) rotate(0deg);
+      }
+      20% {
+        opacity: 0.88;
+        transform: translate(-50%, -50%) scale(0.9) rotate(80deg);
+      }
+      44% {
+        opacity: 0.84;
+        transform: translate(-50%, -50%) scale(1.04) rotate(180deg);
+      }
+      72% {
+        opacity: 0.24;
+        transform: translate(-50%, -50%) scale(0.74) rotate(260deg);
+      }
+    }
+
+    @keyframes slogan-halo-breathe {
+      0%,
+      100% {
+        opacity: 0.58;
+        transform: translate(-50%, -50%) scale(0.97);
+      }
+      50% {
+        opacity: 0.92;
+        transform: translate(-50%, -50%) scale(1.03);
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.35),transparent_30%),linear-gradient(180deg,#f8d6e8_0%,#fbcfe8_100%)] px-2 py-3 font-body text-slate-900 sm:grid sm:place-items-center sm:p-5">
   <main class="min-h-[calc(100vh-24px)] w-full overflow-hidden rounded-[2.1rem] border-2 border-rose-200/80 bg-dali-100/90 shadow-shell backdrop-blur md:min-h-[930px] md:max-w-[470px]">
     <section class="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_40%),linear-gradient(135deg,#f067af_0%,#ec4899_72%)] px-6 pb-4 pt-7 text-center text-white">
       <div class="mx-auto flex max-w-sm flex-col items-center">
-        <h1 class="font-brand text-[4.35rem] leading-[0.95] tracking-[0.01em] text-white drop-shadow-[0_8px_18px_rgba(123,17,63,0.2)] sm:text-[5.2rem]">DalisApp</h1>
-        <div
-          class="image-badge mt-1 grid aspect-square w-[10.5rem] cursor-pointer place-items-center overflow-hidden rounded-[2.2rem] border border-white/30 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.52),transparent_55%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-2 shadow-soft [touch-action:manipulation] sm:w-[11.5rem]"
-          aria-hidden="true"
-          data-panda-badge
-        >
-          <picture class="app-image grid size-full place-items-center">
-            <img src="/assets/img/panda-rojo.png" alt="Panda rojo decorativo" loading="lazy" class="block size-full scale-110 object-contain object-center drop-shadow-[0_10px_18px_rgba(123,17,63,0.2)]" />
-          </picture>
+        <div class="brand-glamour" aria-hidden="true">
+          <div class="brand-glamour__halo brand-glamour__halo--blur"></div>
+          <div class="brand-glamour__sparkles">
+            <span class="brand-glamour__spark" style="--spark-left: 14%; --spark-top: 20%; --spark-size: 10px; --spark-duration: 3.6s; --spark-delay: -0.8s;"></span>
+            <span class="brand-glamour__spark" style="--spark-left: 29%; --spark-top: 70%; --spark-size: 8px; --spark-duration: 3.1s; --spark-delay: -2.1s;"></span>
+            <span class="brand-glamour__spark" style="--spark-left: 47%; --spark-top: 26%; --spark-size: 12px; --spark-duration: 2.3s; --spark-delay: -1.4s;"></span>
+            <span class="brand-glamour__spark" style="--spark-left: 61%; --spark-top: 64%; --spark-size: 9px; --spark-duration: 3.9s; --spark-delay: -2.8s;"></span>
+            <span class="brand-glamour__spark" style="--spark-left: 80%; --spark-top: 34%; --spark-size: 13px; --spark-duration: 1.8s; --spark-delay: -0.5s;"></span>
+            <span class="brand-glamour__spark" style="--spark-left: 90%; --spark-top: 70%; --spark-size: 8px; --spark-duration: 1.3s; --spark-delay: -2.4s;"></span>
+          </div>
+          <h1 class="brand-glamour__title font-brand text-[4.35rem] leading-[0.95] tracking-[0.01em] text-white drop-shadow-[0_8px_18px_rgba(123,17,63,0.2)] sm:text-[5.2rem]">DalisApp</h1>
         </div>
-        <p class="mt-2 max-w-xs text-center text-[0.85rem] font-extrabold uppercase tracking-[0.16em] text-dali-100 sm:text-[0.92rem]">Control simple y amable de tus horas extras</p>
+        <div class="panda-glow-wrap">
+          <div class="panda-glow-wrap__halo" aria-hidden="true"></div>
+          <div class="panda-glow-wrap__sparkles" aria-hidden="true">
+            <span class="panda-glow-wrap__spark" style="--panda-spark-left: 12%; --panda-spark-top: 18%; --panda-spark-size: 11px; --panda-spark-duration: 4.6s; --panda-spark-delay: -0.6s;"></span>
+            <span class="panda-glow-wrap__spark" style="--panda-spark-left: 84%; --panda-spark-top: 16%; --panda-spark-size: 14px; --panda-spark-duration: 5.2s; --panda-spark-delay: -2.3s;"></span>
+            <span class="panda-glow-wrap__spark" style="--panda-spark-left: 18%; --panda-spark-top: 82%; --panda-spark-size: 10px; --panda-spark-duration: 4.9s; --panda-spark-delay: -1.5s;"></span>
+            <span class="panda-glow-wrap__spark" style="--panda-spark-left: 88%; --panda-spark-top: 78%; --panda-spark-size: 12px; --panda-spark-duration: 5.5s; --panda-spark-delay: -3.1s;"></span>
+          </div>
+          <div
+            class="image-badge mt-1 grid aspect-square w-[10.5rem] cursor-pointer place-items-center overflow-hidden rounded-[2.2rem] border border-white/30 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.52),transparent_55%),linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] p-2 shadow-soft [touch-action:manipulation] sm:w-[11.5rem]"
+            aria-hidden="true"
+            data-panda-badge
+          >
+            <picture class="app-image grid size-full place-items-center">
+              <img src="/assets/img/panda-rojo.png" alt="Panda rojo decorativo" loading="lazy" class="block size-full scale-110 object-contain object-center drop-shadow-[0_10px_18px_rgba(123,17,63,0.2)]" />
+            </picture>
+          </div>
+        </div>
+        <div class="slogan-glow">
+          <div class="slogan-glow__halo" aria-hidden="true"></div>
+          <p class="slogan-glow__text mt-2 max-w-xs text-center text-[0.85rem] font-extrabold uppercase tracking-[0.16em] text-dali-100 sm:text-[0.92rem]">Control simple y amable de tus horas extras</p>
+        </div>
       </div>
     </section>
 
@@ -196,6 +483,38 @@
     </section>
   </main>
 
+  <script>
+    (() => {
+      const randomBetween = (min, max) => Math.random() * (max - min) + min;
+
+      const titleSparkles = document.querySelectorAll(".brand-glamour__spark");
+      const pandaSparkles = document.querySelectorAll(".panda-glow-wrap__spark");
+
+      const repositionTitleSparkle = (sparkle) => {
+        sparkle.style.setProperty("--spark-left", `${randomBetween(8, 92).toFixed(2)}%`);
+        sparkle.style.setProperty("--spark-top", `${randomBetween(16, 80).toFixed(2)}%`);
+      };
+
+      const repositionPandaSparkle = (sparkle) => {
+        sparkle.style.setProperty("--panda-spark-left", `${randomBetween(6, 94).toFixed(2)}%`);
+        sparkle.style.setProperty("--panda-spark-top", `${randomBetween(8, 92).toFixed(2)}%`);
+      };
+
+      titleSparkles.forEach((sparkle) => {
+        repositionTitleSparkle(sparkle);
+        sparkle.addEventListener("animationiteration", () => {
+          repositionTitleSparkle(sparkle);
+        });
+      });
+
+      pandaSparkles.forEach((sparkle) => {
+        repositionPandaSparkle(sparkle);
+        sparkle.addEventListener("animationiteration", () => {
+          repositionPandaSparkle(sparkle);
+        });
+      });
+    })();
+  </script>
   <script src="/runtime-config.js"></script>
   <script src="https://unpkg.com/pocketbase@0.21.5/dist/pocketbase.umd.js"></script>
   <script type="module" src="/assets/js/auth.js"></script>
